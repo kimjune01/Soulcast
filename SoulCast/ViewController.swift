@@ -8,28 +8,25 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController {
 
-  let mapVC = MapVC()
-  let incomingVC = IncomingBarVC()
+  let childVCs = [MapVC(), IncomingBarVC(), OutgoingButtonVC()]
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    addMapVC()
-    addContolBarVC()
+    addChildVCs()
   }
   
-  func addMapVC() {
-    addChildViewController(mapVC)
-    view.addSubview(mapVC.view)
-    mapVC.didMoveToParentViewController(self)
+  func addChildVCs() {
+    for eachChildVC in childVCs {
+      addChildViewController(eachChildVC)
+      view.addSubview(eachChildVC.view)
+      eachChildVC.didMoveToParentViewController(self)
+    }
   }
   
-  func addContolBarVC() {
-    addChildViewController(incomingVC)
-    view.addSubview(incomingVC.view)
-    incomingVC.didMoveToParentViewController(self)
-  }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()

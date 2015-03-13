@@ -10,11 +10,12 @@ import UIKit
 
 class IncomingBarVC: UIViewController {
   
-  
+  var barHeight:CGFloat = 50
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    view.frame = CGRectMake(0, screenHeight - barHeight, screenWidth, barHeight)
+    view.backgroundColor = UIColor.blueColor()
   }
   
   override func didReceiveMemoryWarning() {

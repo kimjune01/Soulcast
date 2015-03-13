@@ -10,9 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
 
+  let mapVC = MapVC()
+  let incomingVC = IncomingBarVC()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    addMapVC()
+    addContolBarVC()
+  }
+  
+  func addMapVC() {
+    addChildViewController(mapVC)
+    view.addSubview(mapVC.view)
+    mapVC.didMoveToParentViewController(self)
+  }
+  
+  func addContolBarVC() {
+    addChildViewController(incomingVC)
+    view.addSubview(incomingVC.view)
+    incomingVC.didMoveToParentViewController(self)
   }
 
   override func didReceiveMemoryWarning() {

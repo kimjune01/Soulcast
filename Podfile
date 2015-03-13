@@ -3,6 +3,8 @@
 
 target 'SoulCast' do
 
+pod 'TheAmazingAudioEngine'
+
 end
 
 target 'SoulCastTests' do

@@ -14,9 +14,13 @@ class ViewController: UIViewController {
 
   let childVCs = [MapVC(), IncomingBarVC(), OutgoingButtonVC()]
   
+  let recorder = SoulRecorder()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     addChildVCs()
+    
+    recorder.startRecording()
   }
   
   func addChildVCs() {

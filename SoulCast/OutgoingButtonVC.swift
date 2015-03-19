@@ -108,7 +108,7 @@ class OutgoingButtonVC: UIViewController {
 }
 
 extension OutgoingButtonVC: SoulRecorderDelegate {
-  func soulDidFailToRecording() {
+  func soulDidFailToRecord() {
     //
   }
   

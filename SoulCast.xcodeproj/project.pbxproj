@@ -26,6 +26,19 @@
 		3990C9581AB3A3970029F087 /* SoulRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9571AB3A3970029F087 /* SoulRecorder.swift */; };
 		3990C95A1AB3A39F0029F087 /* SoulPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9591AB3A39F0029F087 /* SoulPlayer.swift */; };
 		3990C95C1AB3A3A60029F087 /* SoulCaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C95B1AB3A3A60029F087 /* SoulCaster.swift */; };
+		39D4D6161ABA75D700597CCA /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6081ABA75D700597CCA /* Array.swift */; };
+		39D4D6171ABA75D700597CCA /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6091ABA75D700597CCA /* Dictionary.swift */; };
+		39D4D6181ABA75D700597CCA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D60A1ABA75D700597CCA /* String.swift */; };
+		39D4D6191ABA75D700597CCA /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D60B1ABA75D700597CCA /* Bool.swift */; };
+		39D4D61A1ABA75D700597CCA /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D60C1ABA75D700597CCA /* Character.swift */; };
+		39D4D61B1ABA75D700597CCA /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D60D1ABA75D700597CCA /* Double.swift */; };
+		39D4D61C1ABA75D700597CCA /* ExSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D60F1ABA75D700597CCA /* ExSwift.swift */; };
+		39D4D61D1ABA75D700597CCA /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6101ABA75D700597CCA /* Float.swift */; };
+		39D4D61E1ABA75D700597CCA /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6111ABA75D700597CCA /* Int.swift */; };
+		39D4D61F1ABA75D700597CCA /* NSArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6121ABA75D700597CCA /* NSArray.swift */; };
+		39D4D6201ABA75D700597CCA /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6131ABA75D700597CCA /* NSDate.swift */; };
+		39D4D6211ABA75D700597CCA /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6141ABA75D700597CCA /* Range.swift */; };
+		39D4D6221ABA75D700597CCA /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6151ABA75D700597CCA /* Sequence.swift */; };
 		4A33E4D960F2ADCCC9972925 /* libPods-SoulCast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D46ECF825C26142AC25248A9 /* libPods-SoulCast.a */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +79,20 @@
 		3990C9571AB3A3970029F087 /* SoulRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulRecorder.swift; sourceTree = "<group>"; };
 		3990C9591AB3A39F0029F087 /* SoulPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulPlayer.swift; sourceTree = "<group>"; };
 		3990C95B1AB3A3A60029F087 /* SoulCaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulCaster.swift; sourceTree = "<group>"; };
+		39D4D6081ABA75D700597CCA /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		39D4D6091ABA75D700597CCA /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		39D4D60A1ABA75D700597CCA /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		39D4D60B1ABA75D700597CCA /* Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
+		39D4D60C1ABA75D700597CCA /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		39D4D60D1ABA75D700597CCA /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		39D4D60E1ABA75D700597CCA /* ExSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExSwift.h; sourceTree = "<group>"; };
+		39D4D60F1ABA75D700597CCA /* ExSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwift.swift; sourceTree = "<group>"; };
+		39D4D6101ABA75D700597CCA /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
+		39D4D6111ABA75D700597CCA /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		39D4D6121ABA75D700597CCA /* NSArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSArray.swift; sourceTree = "<group>"; };
+		39D4D6131ABA75D700597CCA /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
+		39D4D6141ABA75D700597CCA /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
+		39D4D6151ABA75D700597CCA /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		72A9DEE19E711BA0EC0C6CE8 /* Pods-SoulCast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoulCast.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoulCast/Pods-SoulCast.release.xcconfig"; sourceTree = "<group>"; };
 		89DB9E60780F151CEA8FC8A6 /* Pods-SoulCast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoulCast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoulCast/Pods-SoulCast.debug.xcconfig"; sourceTree = "<group>"; };
 		D46ECF825C26142AC25248A9 /* libPods-SoulCast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SoulCast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +158,7 @@
 		3934AB501AB3821600941344 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				397C1C9A1ABA720500077988 /* ExSwift */,
 				39601F771AB400B100B52C1D /* SomeObject.h */,
 				39601F781AB400B100B52C1D /* SomeObject.m */,
 				39601F7A1AB400E100B52C1D /* TPOscilloscopeLayer.h */,
@@ -178,6 +206,27 @@
 				39601F741AB3FD1400B52C1D /* SoulCatcher.swift */,
 			);
 			name = SoulControllers;
+			sourceTree = "<group>";
+		};
+		397C1C9A1ABA720500077988 /* ExSwift */ = {
+			isa = PBXGroup;
+			children = (
+				39D4D6081ABA75D700597CCA /* Array.swift */,
+				39D4D6091ABA75D700597CCA /* Dictionary.swift */,
+				39D4D60A1ABA75D700597CCA /* String.swift */,
+				39D4D60B1ABA75D700597CCA /* Bool.swift */,
+				39D4D60C1ABA75D700597CCA /* Character.swift */,
+				39D4D60D1ABA75D700597CCA /* Double.swift */,
+				39D4D60E1ABA75D700597CCA /* ExSwift.h */,
+				39D4D60F1ABA75D700597CCA /* ExSwift.swift */,
+				39D4D6101ABA75D700597CCA /* Float.swift */,
+				39D4D6111ABA75D700597CCA /* Int.swift */,
+				39D4D6121ABA75D700597CCA /* NSArray.swift */,
+				39D4D6131ABA75D700597CCA /* NSDate.swift */,
+				39D4D6141ABA75D700597CCA /* Range.swift */,
+				39D4D6151ABA75D700597CCA /* Sequence.swift */,
+			);
+			name = ExSwift;
 			sourceTree = "<group>";
 		};
 		62D50BEF884D6DB44C702009 /* Frameworks */ = {
@@ -343,14 +392,27 @@
 				3934AB581AB3821600941344 /* ViewController.swift in Sources */,
 				39601F791AB400B100B52C1D /* SomeObject.m in Sources */,
 				3934AB531AB3821600941344 /* AppDelegate.swift in Sources */,
+				39D4D6211ABA75D700597CCA /* Range.swift in Sources */,
 				39601F751AB3FD1400B52C1D /* SoulCatcher.swift in Sources */,
+				39D4D6221ABA75D700597CCA /* Sequence.swift in Sources */,
 				3990C95A1AB3A39F0029F087 /* SoulPlayer.swift in Sources */,
 				3934AB561AB3821600941344 /* SoulCast.xcdatamodeld in Sources */,
+				39D4D61E1ABA75D700597CCA /* Int.swift in Sources */,
 				3990C9561AB3A2350029F087 /* Soul.swift in Sources */,
 				39601F7C1AB400E100B52C1D /* TPOscilloscopeLayer.m in Sources */,
+				39D4D61B1ABA75D700597CCA /* Double.swift in Sources */,
+				39D4D61A1ABA75D700597CCA /* Character.swift in Sources */,
+				39D4D6161ABA75D700597CCA /* Array.swift in Sources */,
+				39D4D6191ABA75D700597CCA /* Bool.swift in Sources */,
 				3990C95C1AB3A3A60029F087 /* SoulCaster.swift in Sources */,
+				39D4D61C1ABA75D700597CCA /* ExSwift.swift in Sources */,
+				39D4D61F1ABA75D700597CCA /* NSArray.swift in Sources */,
+				39D4D6171ABA75D700597CCA /* Dictionary.swift in Sources */,
 				3990C9541AB3A0520029F087 /* OutgoingButtonVC.swift in Sources */,
+				39D4D61D1ABA75D700597CCA /* Float.swift in Sources */,
 				3990C9581AB3A3970029F087 /* SoulRecorder.swift in Sources */,
+				39D4D6181ABA75D700597CCA /* String.swift in Sources */,
+				39D4D6201ABA75D700597CCA /* NSDate.swift in Sources */,
 				3990C9501AB390A80029F087 /* MapVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

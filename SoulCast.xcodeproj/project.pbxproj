@@ -14,6 +14,9 @@
 		3934AB5D1AB3821600941344 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3934AB5C1AB3821600941344 /* Images.xcassets */; };
 		3934AB601AB3821600941344 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3934AB5E1AB3821600941344 /* LaunchScreen.xib */; };
 		3934AB6C1AB3821600941344 /* SoulCastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934AB6B1AB3821600941344 /* SoulCastTests.swift */; };
+		39601F751AB3FD1400B52C1D /* SoulCatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39601F741AB3FD1400B52C1D /* SoulCatcher.swift */; };
+		39601F791AB400B100B52C1D /* SomeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39601F781AB400B100B52C1D /* SomeObject.m */; };
+		39601F7C1AB400E100B52C1D /* TPOscilloscopeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 39601F7B1AB400E100B52C1D /* TPOscilloscopeLayer.m */; };
 		3990C94C1AB38D0E0029F087 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3990C94B1AB38D0E0029F087 /* MapKit.framework */; };
 		3990C94E1AB38EE80029F087 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3990C94D1AB38EE80029F087 /* CoreLocation.framework */; };
 		3990C9501AB390A80029F087 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C94F1AB390A80029F087 /* MapVC.swift */; };
@@ -48,6 +51,12 @@
 		3934AB651AB3821600941344 /* SoulCastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoulCastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3934AB6A1AB3821600941344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3934AB6B1AB3821600941344 /* SoulCastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoulCastTests.swift; sourceTree = "<group>"; };
+		39601F741AB3FD1400B52C1D /* SoulCatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulCatcher.swift; sourceTree = "<group>"; };
+		39601F761AB400B100B52C1D /* SoulCast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoulCast-Bridging-Header.h"; sourceTree = "<group>"; };
+		39601F771AB400B100B52C1D /* SomeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeObject.h; sourceTree = "<group>"; };
+		39601F781AB400B100B52C1D /* SomeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeObject.m; sourceTree = "<group>"; };
+		39601F7A1AB400E100B52C1D /* TPOscilloscopeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOscilloscopeLayer.h; sourceTree = "<group>"; };
+		39601F7B1AB400E100B52C1D /* TPOscilloscopeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOscilloscopeLayer.m; sourceTree = "<group>"; };
 		3990C94B1AB38D0E0029F087 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3990C94D1AB38EE80029F087 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3990C94F1AB390A80029F087 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -107,19 +116,14 @@
 			isa = PBXGroup;
 			children = (
 				3934AB521AB3821600941344 /* AppDelegate.swift */,
-				3934AB571AB3821600941344 /* ViewController.swift */,
-				3990C9531AB3A0520029F087 /* OutgoingButtonVC.swift */,
-				3990C94F1AB390A80029F087 /* MapVC.swift */,
-				3990C9511AB39D580029F087 /* IncomingBarVC.swift */,
-				3990C9551AB3A2350029F087 /* Soul.swift */,
-				3990C9571AB3A3970029F087 /* SoulRecorder.swift */,
-				3990C9591AB3A39F0029F087 /* SoulPlayer.swift */,
-				3990C95B1AB3A3A60029F087 /* SoulCaster.swift */,
+				39601F7D1AB400E900B52C1D /* ViewControllers */,
+				39601F7E1AB400FD00B52C1D /* SoulControllers */,
 				3934AB591AB3821600941344 /* Main.storyboard */,
 				3934AB5C1AB3821600941344 /* Images.xcassets */,
 				3934AB5E1AB3821600941344 /* LaunchScreen.xib */,
 				3934AB541AB3821600941344 /* SoulCast.xcdatamodeld */,
 				3934AB501AB3821600941344 /* Supporting Files */,
+				39601F761AB400B100B52C1D /* SoulCast-Bridging-Header.h */,
 			);
 			path = SoulCast;
 			sourceTree = "<group>";
@@ -127,6 +131,10 @@
 		3934AB501AB3821600941344 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				39601F771AB400B100B52C1D /* SomeObject.h */,
+				39601F781AB400B100B52C1D /* SomeObject.m */,
+				39601F7A1AB400E100B52C1D /* TPOscilloscopeLayer.h */,
+				39601F7B1AB400E100B52C1D /* TPOscilloscopeLayer.m */,
 				3934AB511AB3821600941344 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -147,6 +155,29 @@
 				3934AB6A1AB3821600941344 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		39601F7D1AB400E900B52C1D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3934AB571AB3821600941344 /* ViewController.swift */,
+				3990C9531AB3A0520029F087 /* OutgoingButtonVC.swift */,
+				3990C94F1AB390A80029F087 /* MapVC.swift */,
+				3990C9511AB39D580029F087 /* IncomingBarVC.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		39601F7E1AB400FD00B52C1D /* SoulControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3990C9551AB3A2350029F087 /* Soul.swift */,
+				3990C9571AB3A3970029F087 /* SoulRecorder.swift */,
+				3990C9591AB3A39F0029F087 /* SoulPlayer.swift */,
+				3990C95B1AB3A3A60029F087 /* SoulCaster.swift */,
+				39601F741AB3FD1400B52C1D /* SoulCatcher.swift */,
+			);
+			name = SoulControllers;
 			sourceTree = "<group>";
 		};
 		62D50BEF884D6DB44C702009 /* Frameworks */ = {
@@ -310,10 +341,13 @@
 			files = (
 				3990C9521AB39D580029F087 /* IncomingBarVC.swift in Sources */,
 				3934AB581AB3821600941344 /* ViewController.swift in Sources */,
+				39601F791AB400B100B52C1D /* SomeObject.m in Sources */,
 				3934AB531AB3821600941344 /* AppDelegate.swift in Sources */,
+				39601F751AB3FD1400B52C1D /* SoulCatcher.swift in Sources */,
 				3990C95A1AB3A39F0029F087 /* SoulPlayer.swift in Sources */,
 				3934AB561AB3821600941344 /* SoulCast.xcdatamodeld in Sources */,
 				3990C9561AB3A2350029F087 /* Soul.swift in Sources */,
+				39601F7C1AB400E100B52C1D /* TPOscilloscopeLayer.m in Sources */,
 				3990C95C1AB3A3A60029F087 /* SoulCaster.swift in Sources */,
 				3990C9541AB3A0520029F087 /* OutgoingButtonVC.swift in Sources */,
 				3990C9581AB3A3970029F087 /* SoulRecorder.swift in Sources */,
@@ -441,9 +475,12 @@
 			baseConfigurationReference = 89DB9E60780F151CEA8FC8A6 /* Pods-SoulCast.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SoulCast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoulCast/SoulCast-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -452,9 +489,11 @@
 			baseConfigurationReference = 72A9DEE19E711BA0EC0C6CE8 /* Pods-SoulCast.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SoulCast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoulCast/SoulCast-Bridging-Header.h";
 			};
 			name = Release;
 		};

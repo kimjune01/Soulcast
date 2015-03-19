@@ -8,12 +8,18 @@
 
 import UIKit
 
+let audioController = AEAudioController(audioDescription: AEAudioController.nonInterleaved16BitStereoAudioDescription(), inputEnabled: true)
+
 class Soul: NSObject {
+  var localURL:NSURL?
   //local URL to sound
+  //remote URL to sound
   //remote url
   //JSON representation
   //length
   //origin location
   //cast radius
-  //
+  //origin time
+  //origin token
+  
 }

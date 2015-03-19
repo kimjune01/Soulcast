@@ -4,6 +4,9 @@
 target 'SoulCast' do
 
 pod 'TheAmazingAudioEngine'
+pod 'AFNetworking', "~> 2.0"
+pod 'AWSiOSSDKv2'
+pod 'AWSCognitoSync'
 
 end
 

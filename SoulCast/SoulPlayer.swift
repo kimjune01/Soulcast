@@ -34,6 +34,8 @@ class SoulPlayer: NSObject {
     audioController.addChannels([player])
   }
   
+  
+  
   func reset() {
     audioController.removeChannels([player])
     

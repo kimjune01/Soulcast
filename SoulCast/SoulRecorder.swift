@@ -26,12 +26,12 @@ protocol SoulRecorderDelegate {
 }
 
 class SoulRecorder: NSObject {
-  let minimumRecordDuration:Float = 1.0
-  let maximumRecordDuration:Float = 1.0
+  let minimumRecordDuration:Int = 1
+  let maximumRecordDuration:Int = 5
   var maximumDurationPassed = false
-  var recordingFrames:Int = 0
   var currentRecordingPath:String!
-  var timeKeepingBlock: AEBlockChannel!
+  var displayLink:CADisplayLink!
+  var displayCounter:Int = 0
   var recorder:AERecorder?
   var delegate:SoulRecorderDelegate?
   //records and spits out the url
@@ -43,15 +43,15 @@ class SoulRecorder: NSObject {
       case (.RecordingStarted, .RecordingLongEnough):
         minimumDurationDidPass()
       case (.RecordingStarted, .Failed):
-        discardRecording()
+        break
       case (.RecordingLongEnough, .Failed):
         assert(false, "Should not be here!!")
       case (.RecordingLongEnough, .Finished):
-        saveRecording()
+        break
       case (.Failed, .Standby):
-        resetRecorder()
+        break
       case (.Finished, .Standby):
-        resetRecorder()
+        break
       case (let x, .Err):
         println("state x.hashValue: \(x.hashValue)")
       default:
@@ -61,7 +61,27 @@ class SoulRecorder: NSObject {
     }
   }
   
+  func setup() {
+    displayLink = CADisplayLink(target: self, selector: "displayLinkFired:")
+    displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
+    
+  }
+  
+  func displayLinkFired(link:CADisplayLink) {
+    if state == .RecordingStarted || state == .RecordingLongEnough { displayCounter++ }
+    if displayCounter == 60 * minimumRecordDuration {
+      println("displayCounter == 60 * minimumRecordDuration")
+      if state == .RecordingStarted { state = .RecordingLongEnough }
+    }
+    if displayCounter == 60 * maximumRecordDuration {
+      println("displayCounter == 60 * maximumRecordDuration")
+      if state == .RecordingLongEnough { pleaseStopRecording() }
+      displayCounter = 0
+    }
+  }
+  
   func pleaseStartRecording() {
+    println("pleaseStartRecording()")
     if state != .Standby {
       assert(false, "OOPS!! Tried to start recording from an inappropriate state!")
     } else {
@@ -71,14 +91,16 @@ class SoulRecorder: NSObject {
   }
   
   func pleaseStopRecording() {
+    println("pleaseStopRecording()")
     if state == .RecordingStarted {
-      state = .Failed
+      discardRecording()
     } else if state == .RecordingLongEnough {
-      state = .Finished
+      saveRecording()
     }
   }
   
   private func startRecording() {
+    println("startRecording()")
     var error:NSError?
     let result = audioController.start(&error)
     if let e = error {
@@ -86,7 +108,7 @@ class SoulRecorder: NSObject {
     }
     recorder = AERecorder(audioController: audioController)
     currentRecordingPath = outputPath()
-    recorder?.beginRecordingToFileAtPath(currentRecordingPath, fileType: AudioFileTypeID(kAudioFileM4AType), error: &error)
+    recorder?.beginRecordingToFileAtPath(currentRecordingPath, fileType: AudioFileTypeID(kAudioFileAIFFType), error: &error)
     if let e = error {
       println("raRRRWAREEWAR recording unsuccessful! error: \(e)")
       recorder = nil
@@ -95,32 +117,10 @@ class SoulRecorder: NSObject {
     audioController.addOutputReceiver(recorder)
     audioController.addInputReceiver(recorder)
     
-    //TODO: add a metronome block, subscribe for the minimum record duration.
-    timeKeepingBlock = AEBlockChannel(block: { (time: UnsafePointer<AudioTimeStamp>, frames: UInt32, audioList: UnsafeMutablePointer<AudioBufferList>) -> Void in
-      for (var i = 0 ; i < Int(frames) ; i++) {
-        self.recordingFrames++
-        if self.recordingFrames % 44100 == 0 {
-          if self.recordingFrames == 44100 {
-            //do only if recording state == tooshort
-            if self.state == .RecordingStarted {
-              self.state = .RecordingLongEnough //do once
-            }
-            
-          }
-          if self.recordingFrames == 44100 * 5 {
-            if self.state == .RecordingLongEnough {
-              self.state = .Finished
-            }
-            audioController.removeChannels([self.timeKeepingBlock])
-          }
-        }
-      }
-    })
-    audioController.addChannels([timeKeepingBlock])
-    
   }
   
   private func minimumDurationDidPass() {
+    println("minimumDurationDidPass()")
     delegate?.soulDidReachMinimumDuration()
   }
   
@@ -139,7 +139,7 @@ class SoulRecorder: NSObject {
       if paths.count > 0 {
         let randomNumberString = String(NSDate.timeIntervalSinceReferenceDate().description)
         println("randomNumberString: \(randomNumberString)")
-        outputPath = (paths[0] as? String)! + "/Recording" + randomNumberString + ".m4a"
+        outputPath = (paths[0] as? String)! + "/Recording" + randomNumberString + ".aiff"
         let manager = NSFileManager.defaultManager()
         var error:NSError?
         if manager.fileExistsAtPath(outputPath) {
@@ -155,27 +155,31 @@ class SoulRecorder: NSObject {
   
   private func discardRecording() {
     println("discardRecording")
+    state = .Failed
+    resetRecorder()
     recorder?.finishRecording()
     delegate?.soulDidFailToRecord()
-    state = .Standby
   }
   
   private func saveRecording() {
     println("saveRecording")
+    state = .Finished
     recorder?.finishRecording()
+    resetRecorder()
     let newSoul = Soul()
     newSoul.localURL = currentRecordingPath
     newSoul.secondsSince1970 = Int(NSDate().timeIntervalSince1970)
     delegate?.soulDidFinishRecording(newSoul)
-    state = .Standby
+    
   }
   
   private func resetRecorder() {
     println("resetRecorder")
+    state = .Standby
     audioController.removeOutputReceiver(recorder)
     audioController.removeInputReceiver(recorder)
     recorder = nil
-    recordingFrames = 0
+    
   }
   
 }

@@ -26,20 +26,30 @@ class OutgoingButtonVC: UIViewController {
     addDisplayLink()
     addOscilloscope()
     addOutgoingButton()
+    configureAudio()
   }
   
   override func viewDidAppear(animated: Bool) {
     //requestStartRecording()
   }
 
+  func configureAudio() {
+    soulRecorder.delegate = self
+    soulRecorder.setup()
+    soulPlayer.delegate = self
+    var error:NSError?
+    let result = audioController.start(&error)
+    dump(error)
+  }
   
   func addOutgoingButton() {
     view.frame = CGRectMake((screenWidth - buttonSize)/2, screenHeight - buttonSize, buttonSize, buttonSize)
     outgoingButton = SimpleOutgoingButton(frame: CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize))
+    //TODO: simplest implementation first.
     //TODO: make pixel perfect.
-    outgoingButton.addTarget(self, action: "outgoingButtonTouchedDown:", forControlEvents: UIControlEvents.TouchDown)
+    //outgoingButton.addTarget(self, action: "outgoingButtonTouchedDown:", forControlEvents: UIControlEvents.TouchDown)
     outgoingButton.addTarget(self, action: "outgoingButtonTouchedUpInside:", forControlEvents: UIControlEvents.TouchUpInside)
-    outgoingButton.addTarget(self, action: "outgoingButtonTouchDraggedExit:", forControlEvents: UIControlEvents.TouchDragExit)
+    //outgoingButton.addTarget(self, action: "outgoingButtonTouchDraggedExit:", forControlEvents: UIControlEvents.TouchDragExit)
     
     view.addSubview(outgoingButton)
   }
@@ -52,8 +62,9 @@ class OutgoingButtonVC: UIViewController {
   
   func outgoingButtonTouchedUpInside(button:UIButton) {
     println("outgoingButtonTouchedUpInside")
-    outgoingButton.buttonState = .Enabled
-    requestFinishRecording()
+//    outgoingButton.buttonState = .Enabled
+//    requestFinishRecording()
+    requestStartRecording()
   }
   
   func outgoingButtonTouchDraggedExit(button:UIButton) {
@@ -84,9 +95,8 @@ class OutgoingButtonVC: UIViewController {
   
   func incrementRecordingIndicator() {
     //TODO: query soulRecorder to update UI.
-    let progress = Float(soulRecorder.recordingFrames) / 5 / 44100
+    let progress = Float(soulRecorder.displayCounter) / Float(soulRecorder.maximumRecordDuration) / 60
     println("progress: \(progress)")
-    //if stroke < 1 { stroke += 0.3333 } //5 seconds * 60 fps
   }
   
   func resetRecordingIndicator() {
@@ -107,6 +117,7 @@ class OutgoingButtonVC: UIViewController {
   }
   
   func playbackSoul(localSoul:Soul) {
+    println("playbackSoul localSoul:\(localSoul)")
     soulPlayer.localSoul = localSoul
     soulPlayer.startPlaying()
   }
@@ -158,7 +169,7 @@ extension OutgoingButtonVC: SoulRecorderDelegate {
   func soulDidFinishRecording(newSoul: Soul) {
     resetRecordingIndicator()
     playbackSoul(newSoul)
-    enableCancel()
+    //enableCancel()
     println("soulDidFinishRecording newSoul: \(newSoul)")
   }
 }
@@ -166,7 +177,7 @@ extension OutgoingButtonVC: SoulRecorderDelegate {
 extension OutgoingButtonVC: SoulPlayerDelegate {
   func soulDidFinishPlaying() {
     //upload unless user cancels.
-    disableCancel()
+    //disableCancel()
   }
   func soulDidFailToPlay() {
     //

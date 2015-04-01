@@ -25,8 +25,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     window?.rootViewController = rootVC
     window?.makeKeyAndVisible()
+    setupAWS()
     return true
   }
+  
+  func setupAWS() {
+    let credentialsProvider = AWSCognitoCredentialsProvider(
+      regionType: CognitoRegionType,
+      identityPoolId: CognitoIdentityPoolId)
+    let configuration = AWSServiceConfiguration(
+      region: DefaultServiceRegionType,
+      credentialsProvider: credentialsProvider)
+    AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+  }
+
 
   func applicationWillResignActive(application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

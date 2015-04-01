@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 June. All rights reserved.
 //
 
-import UIKit
-
 class SoulCatcher: NSObject {
 
   func soulFromUserInfo (userInfo:NSDictionary) -> Soul {

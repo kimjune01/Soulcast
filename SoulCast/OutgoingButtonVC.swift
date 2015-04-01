@@ -176,6 +176,7 @@ extension OutgoingButtonVC: SoulRecorderDelegate {
 
 extension OutgoingButtonVC: SoulPlayerDelegate {
   func soulDidFinishPlaying() {
+    println("soulDidFinishPlaying")
     //upload unless user cancels.
     //disableCancel()
   }

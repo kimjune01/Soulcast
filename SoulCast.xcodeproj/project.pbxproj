@@ -17,6 +17,7 @@
 		3934AB601AB3821600941344 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3934AB5E1AB3821600941344 /* LaunchScreen.xib */; };
 		3934AB6C1AB3821600941344 /* SoulCastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934AB6B1AB3821600941344 /* SoulCastTests.swift */; };
 		395EF6EE1ACC79D00020441A /* SimpleOutgoingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395EF6ED1ACC79D00020441A /* SimpleOutgoingButton.swift */; };
+		395EF6F21ACC92230020441A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395EF6F11ACC92230020441A /* Constants.swift */; };
 		395F22E41ABB6C4D00DFF05B /* SwiftJK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395F22E31ABB6C4D00DFF05B /* SwiftJK.swift */; };
 		39601F751AB3FD1400B52C1D /* SoulCatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39601F741AB3FD1400B52C1D /* SoulCatcher.swift */; };
 		39601F791AB400B100B52C1D /* SomeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39601F781AB400B100B52C1D /* SomeObject.m */; };
@@ -71,6 +72,7 @@
 		3934AB6A1AB3821600941344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3934AB6B1AB3821600941344 /* SoulCastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoulCastTests.swift; sourceTree = "<group>"; };
 		395EF6ED1ACC79D00020441A /* SimpleOutgoingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleOutgoingButton.swift; sourceTree = "<group>"; };
+		395EF6F11ACC92230020441A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		395F22E31ABB6C4D00DFF05B /* SwiftJK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftJK.swift; sourceTree = "<group>"; };
 		39601F741AB3FD1400B52C1D /* SoulCatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulCatcher.swift; sourceTree = "<group>"; };
 		39601F761AB400B100B52C1D /* SoulCast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoulCast-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				3934AB521AB3821600941344 /* AppDelegate.swift */,
+				395EF6F11ACC92230020441A /* Constants.swift */,
 				39601F7D1AB400E900B52C1D /* ViewControllers */,
 				39601F7E1AB400FD00B52C1D /* SoulControllers */,
 				39F6360B1ABBC8DB003CB557 /* Views */,
@@ -417,6 +420,7 @@
 				39D4D6211ABA75D700597CCA /* Range.swift in Sources */,
 				39601F751AB3FD1400B52C1D /* SoulCatcher.swift in Sources */,
 				39D4D6221ABA75D700597CCA /* Sequence.swift in Sources */,
+				395EF6F21ACC92230020441A /* Constants.swift in Sources */,
 				3990C95A1AB3A39F0029F087 /* SoulPlayer.swift in Sources */,
 				3934AB561AB3821600941344 /* SoulCast.xcdatamodeld in Sources */,
 				39D4D61E1ABA75D700597CCA /* Int.swift in Sources */,

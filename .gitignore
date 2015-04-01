@@ -16,8 +16,9 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+
 # Pods - for those of you who use CocoaPods
 Pods
 
-# Credentials for AWS
-/SoulCast/Constants.swift
+# Credentials for AWS, do not put online.
+*Constants.swift

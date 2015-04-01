@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 June. All rights reserved.
 //
 
-import UIKit
-
 enum UploaderState {
   case Unknown
   case Uploading
@@ -23,11 +21,14 @@ class SoulCaster: NSObject {
     didSet {
       switch (oldValue, soulCasterState) {
       case (.Unknown, .Uploading):
-        startUploading()
+        break
+        //startUploading()
       case (.Uploading, .Finished):
-        notifyDelegate()
+        break
+        //notifyDelegate()
       case (.Finished, .Unknown):
-        reset()
+        break
+        //reset()
       case (let x, .Failed):
         println("soulCasterState x.hashValue: \(x.hashValue)")
       default:

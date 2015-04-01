@@ -3,6 +3,7 @@
 //
 #import "TheAmazingAudioEngine.h"
 #import "AERecorder.h"
+#import "TPOscilloscopeLayer.h"
 
 #import "AWSCore.h"
 #import "S3.h"

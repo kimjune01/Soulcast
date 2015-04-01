@@ -11,7 +11,8 @@ import UIKit
 let audioController = AEAudioController(audioDescription: AEAudioController.nonInterleaved16BitStereoAudioDescription(), inputEnabled: true)
 
 class Soul: NSObject {
-  var localURL:NSURL?
+  var localURL:NSString?
+  var secondsSince1970:Int?
   //local URL to sound
   //remote URL to sound
   //remote url

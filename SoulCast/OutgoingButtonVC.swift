@@ -8,111 +8,167 @@
 
 import UIKit
 
-enum RecordButtonState {
-  case Able
-  case Recording
-  case Disabled
-}
 
 class OutgoingButtonVC: UIViewController {
   
-  var buttonSize:CGFloat = 80
-  var outgoingButton: UIButton!
+  var buttonSize:CGFloat = screenWidth * 2/3
+  var outgoingButton: SimpleOutgoingButton!
   var outgoingSoul:Soul?
   var recordingStartTime:NSDate!
   var soulRecorder = SoulRecorder()
+  var soulPlayer = SoulPlayer()
+  var displayLink: CADisplayLink!
   
-  var outgoingButtonState: RecordButtonState = .Able {
-    didSet {
-      switch (oldValue, outgoingButtonState) {
-      case (.Able, .Recording):
-        requestStartRecording()
-      case (.Recording, .Able):
-        requestCancelRecording()
-      case (.Recording, .Disabled):
-        requestFinishRecording()
-      case (.Disabled, .Able):
-        enableButtonUI()
-      default:
-        assert(false, "OOOPS!!!")
-      }
-    }
-  }
-  
+  var oscilloscope = TPOscilloscopeLayer(audioController: audioController)
+
   override func viewDidLoad() {
     super.viewDidLoad()
+    addDisplayLink()
+    addOscilloscope()
     addOutgoingButton()
   }
   
+  override func viewDidAppear(animated: Bool) {
+    //requestStartRecording()
+  }
+
+  
   func addOutgoingButton() {
     view.frame = CGRectMake((screenWidth - buttonSize)/2, screenHeight - buttonSize, buttonSize, buttonSize)
-    view.backgroundColor = UIColor.redColor()
-
-    outgoingButton = UIButton(frame: view.frame)
+    outgoingButton = SimpleOutgoingButton(frame: CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize))
     //TODO: make pixel perfect.
     outgoingButton.addTarget(self, action: "outgoingButtonTouchedDown:", forControlEvents: UIControlEvents.TouchDown)
     outgoingButton.addTarget(self, action: "outgoingButtonTouchedUpInside:", forControlEvents: UIControlEvents.TouchUpInside)
     outgoingButton.addTarget(self, action: "outgoingButtonTouchDraggedExit:", forControlEvents: UIControlEvents.TouchDragExit)
     
+    view.addSubview(outgoingButton)
   }
   
   func outgoingButtonTouchedDown(button:UIButton) {
     println("outgoingButtonTouchedDown")
-    outgoingButtonState = .Recording
+    outgoingButton.buttonState = .Recording
+    requestStartRecording()
   }
   
   func outgoingButtonTouchedUpInside(button:UIButton) {
     println("outgoingButtonTouchedUpInside")
-    let timeInterval:Double = NSDate().timeIntervalSinceDate(recordingStartTime)
-    println("timeInterval: \(timeInterval)")
-    if timeInterval > 1 {
-      outgoingButtonState = .Disabled
-    } else {
-      outgoingButtonState = .Able
-    }
+    outgoingButton.buttonState = .Enabled
+    requestFinishRecording()
   }
   
   func outgoingButtonTouchDraggedExit(button:UIButton) {
     println("outgoingButtonTouchDraggedExit")
-    outgoingButtonState = .Able
+    outgoingButton.buttonState = .Enabled
+    requestFinishRecording()
+  }
+  
+  func addDisplayLink() {
+    displayLink = CADisplayLink(target: self, selector: "displayLinkFired:")
+    displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
+  }
+  
+  func displayLinkFired(link:CADisplayLink) {
+    if soulRecorder.state == .RecordingStarted || soulRecorder.state == .RecordingLongEnough {
+      incrementRecordingIndicator()
+    }
+    
+  }
+  
+  func addOscilloscope() {
+    oscilloscope.frame = CGRect(x: buttonSize*0.05, y:buttonSize*0.05, width: buttonSize*0.9, height: buttonSize*0.9)
+    oscilloscope.lineColor = UIColor.blueColor().colorWithAlphaComponent(0.7)
+    view.layer.addSublayer(oscilloscope)
+    audioController.addInputReceiver(oscilloscope)
+    oscilloscope.start()
+  }
+  
+  func incrementRecordingIndicator() {
+    //TODO: query soulRecorder to update UI.
+    let progress = Float(soulRecorder.recordingFrames) / 5 / 44100
+    println("progress: \(progress)")
+    //if stroke < 1 { stroke += 0.3333 } //5 seconds * 60 fps
+  }
+  
+  func resetRecordingIndicator() {
+    //animate alpha = 0 ease out, upom completion, stroke = 0
+    //TODO:
   }
   
   func requestStartRecording() {
     recordingStartTime = NSDate()
-    //soulRecorder.startRecording()
+    soulRecorder.pleaseStartRecording()
     
-  }
-  
-  func requestCancelRecording() {
-    //pressed button for less than one second. reset soulRecorder
   }
   
   func requestFinishRecording() {
+    soulRecorder.pleaseStopRecording()
     //replay, save, change ui to disabled.
-    disableButtonUI()
+    
   }
   
-  func enableButtonUI() {
-    
+  func playbackSoul(localSoul:Soul) {
+    soulPlayer.localSoul = localSoul
+    soulPlayer.startPlaying()
   }
   
   func disableButtonUI() {
     
   }
   
-  //TODO: show alert for recording less than one second.
+  func enableCancel() {
+    //turn button action into a cancel, where it resets everything.
+  }
   
+  func disableCancel() {
+    
+  }
   
+  func turnButtonTintDud() {
+    
+  }
   
+  func turnButtonTintRecordingLongEnough() {
+    
+  }
+  
+  func turnButtonTintFinished() {
+    
+  }
+  
+  func animateNegativeShake() {
+    //left to right a couple times, disable button in the meanwhile.
+  }
   
 }
 
 extension OutgoingButtonVC: SoulRecorderDelegate {
+  func soulDidStartRecording() {
+    turnButtonTintDud()
+  }
+  
   func soulDidFailToRecord() {
-    //
+    //negative animation, go back to being enabled
+    animateNegativeShake()
+  }
+  
+  func soulDidReachMinimumDuration() {
+    turnButtonTintRecordingLongEnough()
   }
   
   func soulDidFinishRecording(newSoul: Soul) {
+    resetRecordingIndicator()
+    playbackSoul(newSoul)
+    enableCancel()
+    println("soulDidFinishRecording newSoul: \(newSoul)")
+  }
+}
+
+extension OutgoingButtonVC: SoulPlayerDelegate {
+  func soulDidFinishPlaying() {
+    //upload unless user cancels.
+    disableCancel()
+  }
+  func soulDidFailToPlay() {
     //
   }
 }

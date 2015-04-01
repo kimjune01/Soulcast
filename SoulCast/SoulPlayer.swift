@@ -8,59 +8,34 @@
 
 import UIKit
 
-enum PlayerState {
-  case Unknown
-  case Playing
-  case Paused
-  case Finished
-  case Err
+protocol SoulPlayerDelegate {
+  func soulDidFinishPlaying()
+  func soulDidFailToPlay()
 }
 
 class SoulPlayer: NSObject {
   var localSoul:Soul!
-  var soulPlayerState:PlayerState = .Unknown {
-    didSet{
-      switch (oldValue, soulPlayerState) {
-      case (.Unknown, .Playing):
-        startPlaying()
-      case (.Playing, .Paused):
-        pause()
-      case (.Paused, .Playing):
-        resume()
-      case (.Playing, .Finished):
-        reset()
-      case (let x, .Err):
-        println("soulPlayerState x.hashValue: \(x.hashValue)")
-      default:
-        assert(false, "OOPS!!!")
-      }
-    }
-  }
+  var player: AEAudioFilePlayer!
+  var delegate: SoulPlayerDelegate!
 
   func startPlaying() {
     var error:NSError?
-    let player = AEAudioFilePlayer.audioFilePlayerWithURL(localSoul.localURL!, audioController: audioController, error: &error) as? AEAudioFilePlayer
+    player = AEAudioFilePlayer.audioFilePlayerWithURL(NSURL(fileURLWithPath: localSoul.localURL!), audioController: audioController, error: &error) as? AEAudioFilePlayer
     if let e = error {
       println("oh noes! playAudioAtPath error: \(e)")
-      soulPlayerState = .Err
+      delegate.soulDidFailToPlay()
       return
     }
     player?.removeUponFinish = true
     player?.completionBlock = {
-      //
+      self.delegate.soulDidFinishPlaying()
+      self.reset()
     }
-    audioController.addChannels(NSArray(object: player!))
-  }
-  
-  func pause() {
-    
-  }
-  
-  func resume() {
-    
+    audioController.addChannels([player])
   }
   
   func reset() {
+    audioController.removeChannels([player])
     
   }
   

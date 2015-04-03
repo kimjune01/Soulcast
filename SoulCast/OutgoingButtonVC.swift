@@ -17,6 +17,7 @@ class OutgoingButtonVC: UIViewController {
   var recordingStartTime:NSDate!
   var soulRecorder = SoulRecorder()
   var soulPlayer = SoulPlayer()
+  var soulCaster = singleSoulCaster
   var displayLink: CADisplayLink!
   
   var oscilloscope = TPOscilloscopeLayer(audioController: audioController)
@@ -27,6 +28,7 @@ class OutgoingButtonVC: UIViewController {
     addOscilloscope()
     addOutgoingButton()
     configureAudio()
+    configureNetworking()
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -40,6 +42,11 @@ class OutgoingButtonVC: UIViewController {
     var error:NSError?
     let result = audioController.start(&error)
     dump(error)
+  }
+  
+  func configureNetworking() {
+    singleSoulCaster = SoulCaster()
+    singleSoulCaster.delegate = self
   }
   
   func addOutgoingButton() {
@@ -96,7 +103,7 @@ class OutgoingButtonVC: UIViewController {
   func incrementRecordingIndicator() {
     //TODO: query soulRecorder to update UI.
     let progress = Float(soulRecorder.displayCounter) / Float(soulRecorder.maximumRecordDuration) / 60
-    println("progress: \(progress)")
+    
   }
   
   func resetRecordingIndicator() {
@@ -175,12 +182,31 @@ extension OutgoingButtonVC: SoulRecorderDelegate {
 }
 
 extension OutgoingButtonVC: SoulPlayerDelegate {
-  func soulDidFinishPlaying() {
+  func soulDidFinishPlaying(localSoul:Soul) {
     println("soulDidFinishPlaying")
     //upload unless user cancels.
-    //disableCancel()
+    //soulCaster.upload(localSoul)
+    
   }
   func soulDidFailToPlay() {
     //
+  }
+}
+
+extension OutgoingButtonVC: SoulCasterDelegate {
+  func soulDidStartUploading() {
+    println("soulDidStartUploading")
+  }
+  func soulIsUploading(progress:Float) { //main thread
+    println("soulIsUploading progress: \(progress)")
+  }
+  func soulDidFinishUploading() {
+    println("soulDidFinishUploading")
+  }
+  func soulDidFailToUpload() {
+    println("soulDidFailToUpload")
+  }
+  func soulDidReachServer() {
+    println("soulDidReachServer")
   }
 }

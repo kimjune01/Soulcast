@@ -12,3 +12,5 @@
 #import <AWSSNS/AWSSNS.h>
 #import <AWSCognito/AWSCognito.h>
 
+#import <AFNetworking/AFNetworking.h>
+#import "AFNetworkReachabilityManager.h"

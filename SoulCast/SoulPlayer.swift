@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SoulPlayerDelegate {
-  func soulDidFinishPlaying()
+  func soulDidFinishPlaying(localSoul:Soul)
   func soulDidFailToPlay()
 }
 
@@ -28,7 +28,7 @@ class SoulPlayer: NSObject {
     }
     player?.removeUponFinish = true
     player?.completionBlock = {
-      self.delegate.soulDidFinishPlaying()
+      self.delegate.soulDidFinishPlaying(self.localSoul)
       self.reset()
     }
     audioController.addChannels([player])

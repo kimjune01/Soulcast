@@ -41,7 +41,7 @@ class SoulRecorder: NSObject {
       case (.Standby, .RecordingStarted):
         break
       case (.RecordingStarted, .RecordingLongEnough):
-        minimumDurationDidPass()
+        break
       case (.RecordingStarted, .Failed):
         break
       case (.RecordingLongEnough, .Failed):
@@ -71,7 +71,7 @@ class SoulRecorder: NSObject {
     if state == .RecordingStarted || state == .RecordingLongEnough { displayCounter++ }
     if displayCounter == 60 * minimumRecordDuration {
       println("displayCounter == 60 * minimumRecordDuration")
-      if state == .RecordingStarted { state = .RecordingLongEnough }
+      if state == .RecordingStarted { minimumDurationDidPass() }
     }
     if displayCounter == 60 * maximumRecordDuration {
       println("displayCounter == 60 * maximumRecordDuration")
@@ -108,7 +108,7 @@ class SoulRecorder: NSObject {
     }
     recorder = AERecorder(audioController: audioController)
     currentRecordingPath = outputPath()
-    recorder?.beginRecordingToFileAtPath(currentRecordingPath, fileType: AudioFileTypeID(kAudioFileAIFFType), error: &error)
+    recorder?.beginRecordingToFileAtPath(currentRecordingPath, fileType: AudioFileTypeID(kAudioFileM4AType), error: &error)
     if let e = error {
       println("raRRRWAREEWAR recording unsuccessful! error: \(e)")
       recorder = nil
@@ -121,6 +121,7 @@ class SoulRecorder: NSObject {
   
   private func minimumDurationDidPass() {
     println("minimumDurationDidPass()")
+    state = .RecordingLongEnough
     delegate?.soulDidReachMinimumDuration()
   }
   
@@ -139,7 +140,7 @@ class SoulRecorder: NSObject {
       if paths.count > 0 {
         let randomNumberString = String(NSDate.timeIntervalSinceReferenceDate().description)
         println("randomNumberString: \(randomNumberString)")
-        outputPath = (paths[0] as? String)! + "/Recording" + randomNumberString + ".aiff"
+        outputPath = (paths[0] as? String)! + "/Recording" + randomNumberString + ".m4a"
         let manager = NSFileManager.defaultManager()
         var error:NSError?
         if manager.fileExistsAtPath(outputPath) {
@@ -150,14 +151,15 @@ class SoulRecorder: NSObject {
         }
       }
     }
+    println("outputPath: \(outputPath)")
     return outputPath
   }
   
   private func discardRecording() {
     println("discardRecording")
     state = .Failed
-    resetRecorder()
     recorder?.finishRecording()
+    resetRecorder()
     delegate?.soulDidFailToRecord()
   }
   

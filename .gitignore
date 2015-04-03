@@ -17,6 +17,9 @@ profile
 DerivedData
 .idea/
 
+#for push certificates etc.
+Certificates
+
 # Pods - for those of you who use CocoaPods
 Pods
 

@@ -31,6 +31,9 @@
 		3990C9581AB3A3970029F087 /* SoulRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9571AB3A3970029F087 /* SoulRecorder.swift */; };
 		3990C95A1AB3A39F0029F087 /* SoulPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9591AB3A39F0029F087 /* SoulPlayer.swift */; };
 		3990C95C1AB3A3A60029F087 /* SoulCaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C95B1AB3A3A60029F087 /* SoulCaster.swift */; };
+		39A44E191ACFC9E700539CFE /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E181ACFC9E700539CFE /* DeviceManager.swift */; };
+		39A44E1B1AD057A500539CFE /* SoulPusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E1A1AD057A500539CFE /* SoulPusher.swift */; };
+		39A44E1D1AD06F8600539CFE /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E1C1AD06F8600539CFE /* Device.swift */; };
 		39D4D6161ABA75D700597CCA /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6081ABA75D700597CCA /* Array.swift */; };
 		39D4D6171ABA75D700597CCA /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6091ABA75D700597CCA /* Dictionary.swift */; };
 		39D4D6181ABA75D700597CCA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D60A1ABA75D700597CCA /* String.swift */; };
@@ -60,7 +63,7 @@
 /* Begin PBXFileReference section */
 		3913C9641AC4F2FC00128D06 /* OutgoingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingButton.swift; sourceTree = "<group>"; };
 		3913C9661AC4F32400128D06 /* QCMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QCMethod.swift; sourceTree = "<group>"; };
-		3934AB4D1AB3821600941344 /* SoulCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoulCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3934AB4D1AB3821600941344 /* Soulcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soulcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3934AB511AB3821600941344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3934AB521AB3821600941344 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3934AB551AB3821600941344 /* SoulCast.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SoulCast.xcdatamodel; sourceTree = "<group>"; };
@@ -82,13 +85,16 @@
 		39601F7B1AB400E100B52C1D /* TPOscilloscopeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOscilloscopeLayer.m; sourceTree = "<group>"; };
 		3990C94B1AB38D0E0029F087 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3990C94D1AB38EE80029F087 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		3990C94F1AB390A80029F087 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		3990C94F1AB390A80029F087 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MapVC.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3990C9511AB39D580029F087 /* IncomingBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingBarVC.swift; sourceTree = "<group>"; };
 		3990C9531AB3A0520029F087 /* OutgoingButtonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingButtonVC.swift; sourceTree = "<group>"; };
 		3990C9551AB3A2350029F087 /* Soul.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Soul.swift; sourceTree = "<group>"; };
 		3990C9571AB3A3970029F087 /* SoulRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulRecorder.swift; sourceTree = "<group>"; };
 		3990C9591AB3A39F0029F087 /* SoulPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulPlayer.swift; sourceTree = "<group>"; };
 		3990C95B1AB3A3A60029F087 /* SoulCaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulCaster.swift; sourceTree = "<group>"; };
+		39A44E181ACFC9E700539CFE /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+		39A44E1A1AD057A500539CFE /* SoulPusher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulPusher.swift; sourceTree = "<group>"; };
+		39A44E1C1AD06F8600539CFE /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		39D4D6081ABA75D700597CCA /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		39D4D6091ABA75D700597CCA /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		39D4D60A1ABA75D700597CCA /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -143,7 +149,7 @@
 		3934AB4E1AB3821600941344 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3934AB4D1AB3821600941344 /* SoulCast.app */,
+				3934AB4D1AB3821600941344 /* Soulcast.app */,
 				3934AB651AB3821600941344 /* SoulCastTests.xctest */,
 			);
 			name = Products;
@@ -155,7 +161,8 @@
 				3934AB521AB3821600941344 /* AppDelegate.swift */,
 				395EF6F11ACC92230020441A /* Constants.swift */,
 				39601F7D1AB400E900B52C1D /* ViewControllers */,
-				39601F7E1AB400FD00B52C1D /* SoulControllers */,
+				39601F7E1AB400FD00B52C1D /* Soul */,
+				39A44E171ACFC98C00539CFE /* Device */,
 				39F6360B1ABBC8DB003CB557 /* Views */,
 				3934AB5C1AB3821600941344 /* Images.xcassets */,
 				3934AB5E1AB3821600941344 /* LaunchScreen.xib */,
@@ -205,7 +212,7 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		39601F7E1AB400FD00B52C1D /* SoulControllers */ = {
+		39601F7E1AB400FD00B52C1D /* Soul */ = {
 			isa = PBXGroup;
 			children = (
 				3990C9551AB3A2350029F087 /* Soul.swift */,
@@ -213,9 +220,10 @@
 				3990C9591AB3A39F0029F087 /* SoulPlayer.swift */,
 				3990C95B1AB3A3A60029F087 /* SoulCaster.swift */,
 				39601F741AB3FD1400B52C1D /* SoulCatcher.swift */,
+				39A44E1A1AD057A500539CFE /* SoulPusher.swift */,
 				395F22E31ABB6C4D00DFF05B /* SwiftJK.swift */,
 			);
-			name = SoulControllers;
+			name = Soul;
 			sourceTree = "<group>";
 		};
 		397C1C9A1ABA720500077988 /* ExSwift */ = {
@@ -237,6 +245,15 @@
 				39D4D6151ABA75D700597CCA /* Sequence.swift */,
 			);
 			name = ExSwift;
+			sourceTree = "<group>";
+		};
+		39A44E171ACFC98C00539CFE /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				39A44E181ACFC9E700539CFE /* DeviceManager.swift */,
+				39A44E1C1AD06F8600539CFE /* Device.swift */,
+			);
+			name = Device;
 			sourceTree = "<group>";
 		};
 		39F6360B1ABBC8DB003CB557 /* Views */ = {
@@ -290,7 +307,7 @@
 			);
 			name = SoulCast;
 			productName = SoulCast;
-			productReference = 3934AB4D1AB3821600941344 /* SoulCast.app */;
+			productReference = 3934AB4D1AB3821600941344 /* Soulcast.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3934AB641AB3821600941344 /* SoulCastTests */ = {
@@ -322,6 +339,7 @@
 				TargetAttributes = {
 					3934AB4C1AB3821600941344 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 59SVXWFZ98;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -330,6 +348,7 @@
 					};
 					3934AB641AB3821600941344 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 59SVXWFZ98;
 						TestTargetID = 3934AB4C1AB3821600941344;
 					};
 				};
@@ -414,6 +433,7 @@
 				3990C9521AB39D580029F087 /* IncomingBarVC.swift in Sources */,
 				3913C9671AC4F32400128D06 /* QCMethod.swift in Sources */,
 				3934AB581AB3821600941344 /* ViewController.swift in Sources */,
+				39A44E1D1AD06F8600539CFE /* Device.swift in Sources */,
 				395EF6EE1ACC79D00020441A /* SimpleOutgoingButton.swift in Sources */,
 				39601F791AB400B100B52C1D /* SomeObject.m in Sources */,
 				3934AB531AB3821600941344 /* AppDelegate.swift in Sources */,
@@ -426,6 +446,7 @@
 				39D4D61E1ABA75D700597CCA /* Int.swift in Sources */,
 				3990C9561AB3A2350029F087 /* Soul.swift in Sources */,
 				39601F7C1AB400E100B52C1D /* TPOscilloscopeLayer.m in Sources */,
+				39A44E1B1AD057A500539CFE /* SoulPusher.swift in Sources */,
 				39D4D61B1ABA75D700597CCA /* Double.swift in Sources */,
 				39D4D61A1ABA75D700597CCA /* Character.swift in Sources */,
 				39D4D6161ABA75D700597CCA /* Array.swift in Sources */,
@@ -436,6 +457,7 @@
 				39D4D61F1ABA75D700597CCA /* NSArray.swift in Sources */,
 				39D4D6171ABA75D700597CCA /* Dictionary.swift in Sources */,
 				3990C9541AB3A0520029F087 /* OutgoingButtonVC.swift in Sources */,
+				39A44E191ACFC9E700539CFE /* DeviceManager.swift in Sources */,
 				39D4D61D1ABA75D700597CCA /* Float.swift in Sources */,
 				3990C9581AB3A3970029F087 /* SoulRecorder.swift in Sources */,
 				39D4D6181ABA75D700597CCA /* String.swift in Sources */,
@@ -500,6 +522,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: June Kim (L77MH25752)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -520,6 +543,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "8d06aae9-ef13-4a15-8923-c8c73e548b0a";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -542,6 +566,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: June Kim (L77MH25752)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -555,6 +580,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "8d06aae9-ef13-4a15-8923-c8c73e548b0a";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -566,9 +592,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SoulCast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Soulcast;
+				PROVISIONING_PROFILE = "8d06aae9-ef13-4a15-8923-c8c73e548b0a";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoulCast/SoulCast-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -580,9 +609,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SoulCast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Soulcast;
+				PROVISIONING_PROFILE = "8d06aae9-ef13-4a15-8923-c8c73e548b0a";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoulCast/SoulCast-Bridging-Header.h";
 			};
 			name = Release;
@@ -591,6 +623,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -602,6 +636,7 @@
 				INFOPLIST_FILE = SoulCastTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoulCast.app/SoulCast";
 			};
 			name = Debug;
@@ -610,6 +645,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -617,6 +654,7 @@
 				INFOPLIST_FILE = SoulCastTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoulCast.app/SoulCast";
 			};
 			name = Release;

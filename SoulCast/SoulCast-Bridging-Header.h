@@ -14,3 +14,4 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import "AFNetworkReachabilityManager.h"
+#import <Reachability/Reachability.h>

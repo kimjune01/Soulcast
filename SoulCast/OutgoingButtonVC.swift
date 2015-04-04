@@ -8,20 +8,29 @@
 
 import UIKit
 
+protocol OutgoingVCDelegate {
+  func outgoingCastRadius() -> Double
+  func outgoingLongitude() -> Double
+  func outgoingLatitude() -> Double
+  func outgoingDidStart()
+  func outgoingDidStop()
+}
 
-class OutgoingButtonVC: UIViewController {
+class OutgoingVC: UIViewController {
   
   var buttonSize:CGFloat = screenWidth * 2/3
   var outgoingButton: SimpleOutgoingButton!
   var outgoingSoul:Soul?
   var recordingStartTime:NSDate!
   var soulRecorder = SoulRecorder()
-  var soulPlayer = SoulPlayer()
   var soulCaster = singleSoulCaster
   var displayLink: CADisplayLink!
   
+  var soulPlayer = SoulPlayer()
   var oscilloscope = TPOscilloscopeLayer(audioController: audioController)
 
+  var delegate: OutgoingVCDelegate?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     addDisplayLink()
@@ -63,14 +72,17 @@ class OutgoingButtonVC: UIViewController {
   
   func outgoingButtonTouchedDown(button:UIButton) {
     println("outgoingButtonTouchedDown")
+
+    
+    ////
     outgoingButton.buttonState = .Recording
     requestStartRecording()
   }
   
   func outgoingButtonTouchedUpInside(button:UIButton) {
     println("outgoingButtonTouchedUpInside")
-//    outgoingButton.buttonState = .Enabled
-//    requestFinishRecording()
+    //    outgoingButton.buttonState = .Enabled
+    //    requestFinishRecording()
     requestStartRecording()
   }
   
@@ -159,7 +171,7 @@ class OutgoingButtonVC: UIViewController {
   
 }
 
-extension OutgoingButtonVC: SoulRecorderDelegate {
+extension OutgoingVC: SoulRecorderDelegate {
   func soulDidStartRecording() {
     turnButtonTintDud()
   }
@@ -176,16 +188,24 @@ extension OutgoingButtonVC: SoulRecorderDelegate {
   func soulDidFinishRecording(newSoul: Soul) {
     resetRecordingIndicator()
     playbackSoul(newSoul)
+    newSoul.epoch = Int(NSDate().timeIntervalSince1970)
+    newSoul.castRadius = delegate?.outgoingCastRadius()
+    newSoul.s3Key = String(newSoul.epoch!)
+    newSoul.longitude = delegate?.outgoingLongitude()
+    newSoul.latitude = delegate?.outgoingLatitude()
+    soulCaster.upload(newSoul)
+    soulCaster.castSoulToServer(newSoul)
+
+    let outgoing = "outgoing"
+    println("soulDidFinishRecording newSoul: \(newSoul.toParams(type: outgoing))")
     //enableCancel()
-    println("soulDidFinishRecording newSoul: \(newSoul)")
   }
 }
 
-extension OutgoingButtonVC: SoulPlayerDelegate {
+extension OutgoingVC: SoulPlayerDelegate {
   func soulDidFinishPlaying(localSoul:Soul) {
     println("soulDidFinishPlaying")
     //upload unless user cancels.
-    //soulCaster.upload(localSoul)
     
   }
   func soulDidFailToPlay() {
@@ -193,7 +213,7 @@ extension OutgoingButtonVC: SoulPlayerDelegate {
   }
 }
 
-extension OutgoingButtonVC: SoulCasterDelegate {
+extension OutgoingVC: SoulCasterDelegate {
   func soulDidStartUploading() {
     println("soulDidStartUploading")
   }

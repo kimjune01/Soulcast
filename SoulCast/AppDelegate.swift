@@ -25,13 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if window == nil {
       window = UIWindow(frame: UIScreen.mainScreen().bounds)
     }
-    if AFNetworkReachabilityManager.sharedManager().reachable {
-      window?.rootViewController = ViewController()
-    } else {
-      assert(false, "Not reachable!")
-      window?.rootViewController = UIViewController()
-    }
-    window?.makeKeyAndVisible()
+    
     setupAWS()
     registerForPush()
     return true
@@ -43,29 +37,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate { //Networking
   
   func setupReachability() {
+    let reachability = Reachability(hostName: serverURL)
+    if reachability.isReachable() {
+      self.window?.rootViewController = ViewController()
+      self.window?.makeKeyAndVisible()
+    } else {
+      self.window?.rootViewController = UIViewController()
+      self.window?.makeKeyAndVisible()
+    }
+    reachability.reachableBlock = { (reachBlock:Reachability!) in
+      //show alert, saying that it's reachable.
+    }
+    
+    reachability.unreachableBlock = { (unreachBlock: Reachability!) in
+      //show alert, saying that it's unreachable.
+    }
+    reachability.startNotifier()
+    
+    return
+      
     AFNetworkReachabilityManager.sharedManager().startMonitoring()
     AFNetworkReachabilityManager.sharedManager().setReachabilityStatusChangeBlock { (status: AFNetworkReachabilityStatus) -> Void in
       switch status {
       case AFNetworkReachabilityStatus.NotReachable: //TODO: handle unreachability
+        println("NotReachable")
+        assert(false, "Not reachable!")
         break
       case AFNetworkReachabilityStatus.ReachableViaWiFi:
-        break
+        println("ReachableViaWiFi")
+        fallthrough
       case AFNetworkReachabilityStatus.ReachableViaWWAN:
+        println("ReachableViaWWAN")
+        self.window?.rootViewController = ViewController()
+        self.window?.makeKeyAndVisible()
         break
       case AFNetworkReachabilityStatus.Unknown:
+        println("Unknown")
         break
       }
     }
   }
   
   func setupAWS() {
-    let credentialsProvider = AWSCognitoCredentialsProvider(
+    let credentialsProvider =
+    AWSCognitoCredentialsProvider(
       regionType: CognitoRegionType,
-      identityPoolId: CognitoIdentityPoolId)
+      identityId: nil,
+      identityPoolId: CognitoIdentityPoolId,
+      logins: nil)
+//    let credentialsProvider = AWSCognitoCredentialsProvider(
+//      regionType: CognitoRegionType,
+//      identityPoolId: CognitoIdentityPoolId)
     let configuration = AWSServiceConfiguration(
       region: DefaultServiceRegionType,
       credentialsProvider: credentialsProvider)
     AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+    
+    println("credentialsProvider.getIdentityId(): \(credentialsProvider.getIdentityId())")
   }
   
   func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
@@ -79,23 +107,18 @@ extension AppDelegate { //Networking
   
 }
 
-extension AppDelegate { //push
-  func registerForPush() {
-    let types = UIApplication.sharedApplication().enabledRemoteNotificationTypes()
-    if types == UIRemoteNotificationType.None {
-      let settings = UIUserNotificationSettings(forTypes:
-        UIUserNotificationType.Alert |
-        UIUserNotificationType.Badge |
-          UIUserNotificationType.Sound,
-        categories: nil)
-      UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-    }
+extension AppDelegate {
+  func registerForPush() { //TODO: ask for user permission
+    UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))
+    UIApplication.sharedApplication().registerForRemoteNotifications()
   }
   
   func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
     let tokenString = tokenStringFrom(data: deviceToken)
-    
-    //
+    println("tokenString: \(tokenString)")
+    let newLocalDevice = Device()
+    newLocalDevice.token = tokenString
+    deviceManager.registerDevice(device: newLocalDevice)
   }
   
   func tokenStringFrom(#data:NSData) -> String {
@@ -108,6 +131,7 @@ extension AppDelegate { //push
   
   func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
     //
+    println("didFailToRegisterForRemoteNotificationsWithError error: \(error)")
   }
   
   func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {

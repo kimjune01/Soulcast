@@ -21,7 +21,7 @@ protocol SoulCasterDelegate {
   func soulDidReachServer()
 }
 
-var singleSoulCaster:SoulCaster!
+var singleSoulCaster:SoulCaster = SoulCaster()
 
 class SoulCaster: NSObject {
   
@@ -73,12 +73,12 @@ class SoulCaster: NSObject {
     assert(localSoul.localURL != nil, "There's nothing to upload!!!")
     self.uploadFileURL = NSURL(fileURLWithPath: localSoul.localURL!)
     println("upload localSoul: \(localSoul) self.uploadFileURL: \(self.uploadFileURL)")
-    assert(localSoul.secondsSince1970 != nil, "There's no key assigned to the soul!!!")
+    assert(localSoul.epoch != nil, "There's no key assigned to the soul!!!")
     if (self.uploadTask != nil) {
       return;
     }
     //
-    let uploadKey = String(localSoul.secondsSince1970!) + ".mp3"
+    let uploadKey = localSoul.s3Key! + ".mp3"
     let presignedURLRequest = getPreSignedURLRequest(uploadKey)
     AWSS3PreSignedURLBuilder.defaultS3PreSignedURLBuilder().getPreSignedURL(presignedURLRequest) .continueWithBlock { (task:BFTask!) -> (AnyObject!) in
       
@@ -88,14 +88,12 @@ class SoulCaster: NSObject {
         
         let presignedURL = task.result as NSURL!
         if (presignedURL != nil) {
-          NSLog("upload presignedURL is: \n%@", presignedURL)
-          
           var request = NSMutableURLRequest(URL: presignedURL)
           request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
           request.HTTPMethod = "PUT"
           
           //contentType in the URLRequest must be the same as the one in getPresignedURLRequest
-          request .setValue(self.fileContentTypeStr, forHTTPHeaderField: "Content-Type")
+          request.setValue(self.fileContentTypeStr, forHTTPHeaderField: "Content-Type")
           
           self.uploadTask = self.session?.uploadTaskWithRequest(request, fromFile: self.uploadFileURL!)
           self.uploadTask?.resume()
@@ -133,7 +131,7 @@ class SoulCaster: NSObject {
 extension SoulCaster: NSURLSessionDataDelegate {
   func URLSession(session: NSURLSession, task: NSURLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
     let progress = Float(totalBytesSent) / Float(totalBytesExpectedToSend)
-    println("UploadTask progress: \(progress)")
+    println("Soul upload progress: \(progress)")
     self.uploadProgress = progress
     if let tempDelegate = self.delegate? {
       dispatch_async(dispatch_get_main_queue()) {
@@ -152,7 +150,7 @@ extension SoulCaster: NSURLSessionTaskDelegate {
         dispatch_async(dispatch_get_main_queue()) {
           tempDelegate.soulDidFinishUploading()
         }
-        postSoulToServer()
+        //castSoulToServer(outgoingSoul!)
       } else {
         dispatch_async(dispatch_get_main_queue()) {
           tempDelegate.soulDidFailToUpload()
@@ -178,22 +176,21 @@ extension SoulCaster: NSURLSessionDelegate {
   }
 }
 
-extension SoulCaster { //AFNetworking
-  func postSoulToServer() { 
+extension SoulCaster {
+  func castSoulToServer(outgoingSoul:Soul) {
     let manager = AFHTTPRequestOperationManager()
-    var params = outgoingSoul!.toParams(type: "outgoing")
+    var params = outgoingSoul.toParams(type: "outgoing")
     
     manager.requestSerializer = AFJSONRequestSerializer(writingOptions: NSJSONWritingOptions.PrettyPrinted)
     manager.responseSerializer = AFJSONResponseSerializer(readingOptions: NSJSONReadingOptions.MutableContainers)
     
-    if let tempDelegate = delegate {
-      manager.POST(serverURL + newSoulSuffix, parameters: params, success: { (operation: AFHTTPRequestOperation!, returnObject: AnyObject!) -> Void in
-        tempDelegate.soulDidReachServer()
-        
-        }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-          //
-      }
+    manager.POST(serverURL + newSoulSuffix, parameters: params, success: { (operation: AFHTTPRequestOperation!, returnObject: AnyObject!) -> Void in
+      self.delegate?.soulDidReachServer()
+      println("castSoulToServer operation: \(operation) returnObject: \(returnObject)")
+      }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+        println("castSoulToServer operation: \(operation) error: \(error)")
     }
+    
 
     
   }

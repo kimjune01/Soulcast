@@ -170,7 +170,6 @@ class SoulRecorder: NSObject {
     resetRecorder()
     let newSoul = Soul()
     newSoul.localURL = currentRecordingPath
-    newSoul.secondsSince1970 = Int(NSDate().timeIntervalSince1970)
     delegate?.soulDidFinishRecording(newSoul)
     
   }

@@ -25,7 +25,6 @@
 		3990C94C1AB38D0E0029F087 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3990C94B1AB38D0E0029F087 /* MapKit.framework */; };
 		3990C94E1AB38EE80029F087 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3990C94D1AB38EE80029F087 /* CoreLocation.framework */; };
 		3990C9501AB390A80029F087 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C94F1AB390A80029F087 /* MapVC.swift */; };
-		3990C9521AB39D580029F087 /* IncomingBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9511AB39D580029F087 /* IncomingBarVC.swift */; };
 		3990C9541AB3A0520029F087 /* OutgoingButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9531AB3A0520029F087 /* OutgoingButtonVC.swift */; };
 		3990C9561AB3A2350029F087 /* Soul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9551AB3A2350029F087 /* Soul.swift */; };
 		3990C9581AB3A3970029F087 /* SoulRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9571AB3A3970029F087 /* SoulRecorder.swift */; };
@@ -34,6 +33,7 @@
 		39A44E191ACFC9E700539CFE /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E181ACFC9E700539CFE /* DeviceManager.swift */; };
 		39A44E1B1AD057A500539CFE /* SoulPusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E1A1AD057A500539CFE /* SoulPusher.swift */; };
 		39A44E1D1AD06F8600539CFE /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E1C1AD06F8600539CFE /* Device.swift */; };
+		39A44E2E1AD1017E00539CFE /* IncomingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E2D1AD1017E00539CFE /* IncomingVC.swift */; };
 		39D4D6161ABA75D700597CCA /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6081ABA75D700597CCA /* Array.swift */; };
 		39D4D6171ABA75D700597CCA /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6091ABA75D700597CCA /* Dictionary.swift */; };
 		39D4D6181ABA75D700597CCA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D60A1ABA75D700597CCA /* String.swift */; };
@@ -86,7 +86,6 @@
 		3990C94B1AB38D0E0029F087 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3990C94D1AB38EE80029F087 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3990C94F1AB390A80029F087 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MapVC.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		3990C9511AB39D580029F087 /* IncomingBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingBarVC.swift; sourceTree = "<group>"; };
 		3990C9531AB3A0520029F087 /* OutgoingButtonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingButtonVC.swift; sourceTree = "<group>"; };
 		3990C9551AB3A2350029F087 /* Soul.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Soul.swift; sourceTree = "<group>"; };
 		3990C9571AB3A3970029F087 /* SoulRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulRecorder.swift; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		39A44E181ACFC9E700539CFE /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		39A44E1A1AD057A500539CFE /* SoulPusher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulPusher.swift; sourceTree = "<group>"; };
 		39A44E1C1AD06F8600539CFE /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		39A44E2D1AD1017E00539CFE /* IncomingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingVC.swift; sourceTree = "<group>"; };
 		39D4D6081ABA75D700597CCA /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		39D4D6091ABA75D700597CCA /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		39D4D60A1ABA75D700597CCA /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 			children = (
 				3934AB571AB3821600941344 /* ViewController.swift */,
 				3990C9531AB3A0520029F087 /* OutgoingButtonVC.swift */,
+				39A44E2D1AD1017E00539CFE /* IncomingVC.swift */,
 				3990C94F1AB390A80029F087 /* MapVC.swift */,
-				3990C9511AB39D580029F087 /* IncomingBarVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -430,11 +430,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3990C9521AB39D580029F087 /* IncomingBarVC.swift in Sources */,
 				3913C9671AC4F32400128D06 /* QCMethod.swift in Sources */,
 				3934AB581AB3821600941344 /* ViewController.swift in Sources */,
 				39A44E1D1AD06F8600539CFE /* Device.swift in Sources */,
 				395EF6EE1ACC79D00020441A /* SimpleOutgoingButton.swift in Sources */,
+				39A44E2E1AD1017E00539CFE /* IncomingVC.swift in Sources */,
 				39601F791AB400B100B52C1D /* SomeObject.m in Sources */,
 				3934AB531AB3821600941344 /* AppDelegate.swift in Sources */,
 				39D4D6211ABA75D700597CCA /* Range.swift in Sources */,

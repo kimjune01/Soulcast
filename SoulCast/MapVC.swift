@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 protocol mapVCDelegate {
-  func mapVCDidChangeCastRadius(castRadius:Double)
+  func mapVCDidChangeradius(radius:Double)
 }
 
 class MapVC: UIViewController {
@@ -54,6 +54,7 @@ class MapVC: UIViewController {
         "latitude": location.coordinate.latitude as Double,
         "longitude": location.coordinate.longitude as Double])
       NSUserDefaults.standardUserDefaults().setValue(locationDictionary, forKey: "locationDictionary")
+      deviceManager.register(Device.localDevice())
     }
     if let span = userSpan {
       let spanDictionary: NSDictionary = NSDictionary(dictionary: [

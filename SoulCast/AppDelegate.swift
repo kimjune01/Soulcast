@@ -21,35 +21,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
-    setupReachability()
     if window == nil {
       window = UIWindow(frame: UIScreen.mainScreen().bounds)
     }
-    
+    self.window?.rootViewController = ViewController()
+    self.window?.makeKeyAndVisible()
+    setupReachability()
     setupAWS()
     registerForPush()
+    if launchOptions != nil {
+      //launched from push notification. Send launchOptions to soulCatcher
+      soulCatcher
+    } else {
+      println("launching without options! Attempting to test models here.")
+      
+    }
+    
     return true
   }
   
-  
+  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    //TODO: send userInfo to soulCatcher.
+    //TODO: start downloading the soul from S3.
+    completionHandler(UIBackgroundFetchResult.NoData)
+    
+  }
 }
 
 extension AppDelegate { //Networking
   
   func setupReachability() {
     let reachability = Reachability(hostName: serverURL)
-    if reachability.isReachable() {
-      self.window?.rootViewController = ViewController()
-      self.window?.makeKeyAndVisible()
-    } else {
-      self.window?.rootViewController = UIViewController()
-      self.window?.makeKeyAndVisible()
-    }
     reachability.reachableBlock = { (reachBlock:Reachability!) in
       //show alert, saying that it's reachable.
+      NSNotificationCenter.defaultCenter().postNotificationName("nowReachable", object: nil)
     }
-    
     reachability.unreachableBlock = { (unreachBlock: Reachability!) in
+      NSNotificationCenter.defaultCenter().postNotificationName("nowUnreachable", object: nil)
       //show alert, saying that it's unreachable.
     }
     reachability.startNotifier()
@@ -118,7 +126,7 @@ extension AppDelegate {
     println("tokenString: \(tokenString)")
     let newLocalDevice = Device()
     newLocalDevice.token = tokenString
-    deviceManager.registerDevice(device: newLocalDevice)
+    deviceManager.registerDeviceLocally(device: newLocalDevice)
   }
   
   func tokenStringFrom(#data:NSData) -> String {
@@ -133,10 +141,7 @@ extension AppDelegate {
     //
     println("didFailToRegisterForRemoteNotificationsWithError error: \(error)")
   }
-  
-  func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-    //
-  }
+
 }
 
 extension AppDelegate {

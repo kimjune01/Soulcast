@@ -5,12 +5,29 @@
 //  Created by Camvy Films on 2015-03-13.
 //  Copyright (c) 2015 June. All rights reserved.
 //
+import Foundation
+
+let soulCatcher = SoulCatcher()
 
 class SoulCatcher: NSObject {
 
-  func soulFromUserInfo (userInfo:NSDictionary) -> Soul {
+  func catch(userInfo:NSDictionary) {
+    if let incomingHash: NSDictionary = userInfo["aps"] as? NSDictionary {
+      let incomingSoul = soulFromApsHash(incomingHash)
+      
+    }
+    //Get a reference to incoming VC, pass soul to incomingVC.
+  }
+  
+  private func soulFromApsHash (hash:NSDictionary) -> Soul {
+    
     let incomingSoul = Soul()
+    let incomingDevice = Device()
+    incomingSoul.device = incomingDevice
     //TODO: parse user info into Soul object
+//    NSJSONSerialization.JSONObjectWithData(<#data: NSData#>, options: <#NSJSONReadingOptions#>, error: <#NSErrorPointer#>)
+//    //TODO: also return device..?
+//    Device.fromParams(hash["device"] as String?)
     return Soul()
   }
   

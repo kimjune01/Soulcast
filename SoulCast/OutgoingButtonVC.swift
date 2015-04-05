@@ -9,7 +9,7 @@
 import UIKit
 
 protocol OutgoingVCDelegate {
-  func outgoingCastRadius() -> Double
+  func outgoingradius() -> Double
   func outgoingLongitude() -> Double
   func outgoingLatitude() -> Double
   func outgoingDidStart()
@@ -189,10 +189,11 @@ extension OutgoingVC: SoulRecorderDelegate {
     resetRecordingIndicator()
     playbackSoul(newSoul)
     newSoul.epoch = Int(NSDate().timeIntervalSince1970)
-    newSoul.castRadius = delegate?.outgoingCastRadius()
+    newSoul.radius = delegate?.outgoingradius()
     newSoul.s3Key = String(newSoul.epoch!)
     newSoul.longitude = delegate?.outgoingLongitude()
     newSoul.latitude = delegate?.outgoingLatitude()
+    newSoul.token = Device.localDevice().token
     soulCaster.upload(newSoul)
     soulCaster.castSoulToServer(newSoul)
 

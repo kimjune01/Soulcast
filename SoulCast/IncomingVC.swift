@@ -8,7 +8,7 @@
 
 import UIKit
 
-class IncomingBarVC: UIViewController {
+class IncomingVC: UIViewController {
   
   var barHeight:CGFloat = 50
   

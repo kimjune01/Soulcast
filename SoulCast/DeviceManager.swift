@@ -3,12 +3,23 @@ let deviceManager = DeviceManager()
 
 class DeviceManager: NSObject {
   
-  func registerDevice(#device: Device) {
-    registerLocally(token: device.token)
-    registerDeviceWithServer(device)
+  func registerDeviceLocally(#device: Device) {
+    NSUserDefaults.standardUserDefaults().setValue(device.token, forKey: "token")
   }
   
-  private func registerDeviceWithServer (device: Device) {
+  func register(device: Device) {    //do once per lifetime.
+    struct Holder {
+      static var tempDevice = device
+    }
+    AWSSNS.defaultSNS().createPlatformEndpoint(self.createPlatformEndpointInput(device)).continueWithSuccessBlock { (task:BFTask!) -> AnyObject! in
+      let endpointResponse = task.result as AWSSNSCreateEndpointResponse
+      Holder.tempDevice.arn = endpointResponse.endpointArn
+      self.registerWithServer(Holder.tempDevice)
+      return nil
+    }
+  }
+  
+  private func registerWithServer(device:Device) {
     let manager = AFHTTPRequestOperationManager()
     manager.requestSerializer = AFJSONRequestSerializer(writingOptions: NSJSONWritingOptions.PrettyPrinted)
     manager.responseSerializer = AFJSONResponseSerializer(readingOptions: NSJSONReadingOptions.MutableContainers)
@@ -19,11 +30,14 @@ class DeviceManager: NSObject {
         //
         println("registerDevice POST Failure! operation: \(operation), error: \(error.localizedDescription)")
     }
+  }
+  
+  func createPlatformEndpointInput(device:Device) -> AWSSNSCreatePlatformEndpointInput{
+    let input = AWSSNSCreatePlatformEndpointInput()
+    input.token = device.token
+    return input
     
   }
   
-  private func registerLocally(#token: String) {
-    NSUserDefaults.standardUserDefaults().setValue(token, forKey: "token")
-  }
 
 }

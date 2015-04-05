@@ -11,15 +11,15 @@ import UIKit
 let audioController = AEAudioController(audioDescription: AEAudioController.nonInterleaved16BitStereoAudioDescription(), inputEnabled: true)
 
 class Soul: NSObject {
-  var s3Key:NSString?
+  var s3Key:String?
   var localURL:NSString?
   var epoch:Int?
   var longitude:Double?
   var latitude:Double?
-  var castRadius: Double?
+  var radius: Double?
+  var token: String?
+  var device: Device?
   //length
-  //cast radius
-  //origin token
   
   func toParams(#type:String) -> NSDictionary {
     let wrapperParams = NSMutableDictionary()
@@ -31,7 +31,8 @@ class Soul: NSObject {
     contentParams["epoch"] = epoch
     contentParams["longitude"] = longitude
     contentParams["latitude"] = latitude
-    contentParams["castRadius"] = castRadius
+    contentParams["radius"] = radius
+    contentParams["token"] = token
     
     return wrapperParams
   }
@@ -46,11 +47,22 @@ class Soul: NSObject {
         incomingSoul.epoch = contentParams["epoch"] as? Int
         incomingSoul.longitude = contentParams["longitude"] as? Double
         incomingSoul.latitude = contentParams["latitude"] as? Double
-        incomingSoul.castRadius = contentParams["castRadius"] as? Double
+        incomingSoul.radius = contentParams["radius"] as? Double
+        incomingSoul.token = contentParams["token"] as? String
       }
     } else {
       assert(false, "Attempted to interpret a non-incoming Soul!")
     }
     return incomingSoul
+  }
+  
+  class func seedSoul() -> Soul {
+    let seed = Soul()
+    seed.s3Key = "1428104002"
+    seed.epoch = 14932432
+    seed.longitude = -93.2783
+    seed.latitude = 44.9817
+    seed.token = Device.seedDevice().token
+    return seed
   }
 }

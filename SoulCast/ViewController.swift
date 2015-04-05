@@ -15,17 +15,17 @@ class ViewController: UIViewController {
   var childVCs:[UIViewController]!
   let outgoingVC = OutgoingVC()
   let mapVC = MapVC()
-  let incomingBarVC = IncomingBarVC()
+  let incomingVC = IncomingVC()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     addChildVCs()
-    
+    listenToReachability()
   }
   
   func addChildVCs() {
     outgoingVC.delegate = self
-    childVCs = [mapVC, incomingBarVC, outgoingVC]
+    childVCs = [mapVC, incomingVC, outgoingVC]
     
     for eachChildVC in childVCs {
       addChildViewController(eachChildVC)
@@ -34,6 +34,19 @@ class ViewController: UIViewController {
     }
   }
   
+  func listenToReachability() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "nowReachable", name: "nowReachable", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "nowUnreachable", name: "nowUnreachable", object: nil)
+    
+  }
+  
+  func nowReachable() {
+    //
+  }
+  
+  func nowUnreachable() {
+    //
+  }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -44,8 +57,8 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: OutgoingVCDelegate {
-  func outgoingCastRadius() -> Double {
-    println("outgoingCastRadius: mapVC.userSpan!.latitudeDelta: \(mapVC.userSpan!.latitudeDelta)")
+  func outgoingradius() -> Double {
+    println("outgoingradius: mapVC.userSpan!.latitudeDelta: \(mapVC.userSpan!.latitudeDelta)")
     return mapVC.userSpan!.latitudeDelta
   }
   

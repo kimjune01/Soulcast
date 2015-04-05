@@ -30,8 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setupAWS()
     registerForPush()
     if launchOptions != nil {
-      //launched from push notification. Send launchOptions to soulCatcher
-      soulCatcher
+      soulTester.setup()
+      soulTester.testIncoming(launchOptions as NSDictionary!)
+      
     } else {
       println("launching without options! Attempting to test models here.")
       
@@ -41,9 +42,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-    //TODO: send userInfo to soulCatcher.
+    switch application.applicationState {
+    case .Background:
+      //called when the push is first received
+      completionHandler(.NewData)
+      break
+    case .Inactive:
+      //called when the user interacts with the push
+      completionHandler(.NewData)
+      break
+    case .Active:
+      //called when a soul is received while app is open.
+      completionHandler(.NewData)
+      break
+
+    }
+    
+    //TODO: check for action from userInfo
+    println("application didReceiveRemoteNotification")
+    soulTester.testIncoming(userInfo)
     //TODO: start downloading the soul from S3.
-    completionHandler(UIBackgroundFetchResult.NoData)
     
   }
 }
@@ -62,40 +80,15 @@ extension AppDelegate { //Networking
     }
     reachability.startNotifier()
     
-    return
-      
-    AFNetworkReachabilityManager.sharedManager().startMonitoring()
-    AFNetworkReachabilityManager.sharedManager().setReachabilityStatusChangeBlock { (status: AFNetworkReachabilityStatus) -> Void in
-      switch status {
-      case AFNetworkReachabilityStatus.NotReachable: //TODO: handle unreachability
-        println("NotReachable")
-        assert(false, "Not reachable!")
-        break
-      case AFNetworkReachabilityStatus.ReachableViaWiFi:
-        println("ReachableViaWiFi")
-        fallthrough
-      case AFNetworkReachabilityStatus.ReachableViaWWAN:
-        println("ReachableViaWWAN")
-        self.window?.rootViewController = ViewController()
-        self.window?.makeKeyAndVisible()
-        break
-      case AFNetworkReachabilityStatus.Unknown:
-        println("Unknown")
-        break
-      }
-    }
   }
   
   func setupAWS() {
-    let credentialsProvider =
-    AWSCognitoCredentialsProvider(
-      regionType: CognitoRegionType,
-      identityId: nil,
-      identityPoolId: CognitoIdentityPoolId,
-      logins: nil)
 //    let credentialsProvider = AWSCognitoCredentialsProvider(
 //      regionType: CognitoRegionType,
-//      identityPoolId: CognitoIdentityPoolId)
+//      identityId: nil,
+//      identityPoolId: CognitoIdentityPoolId,
+//      logins: nil)
+    let credentialsProvider = AWSCognitoCredentialsProvider(regionType: CognitoRegionType, identityPoolId: CognitoIdentityPoolId)
     let configuration = AWSServiceConfiguration(
       region: DefaultServiceRegionType,
       credentialsProvider: credentialsProvider)

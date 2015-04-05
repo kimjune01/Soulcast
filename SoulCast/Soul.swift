@@ -56,13 +56,4 @@ class Soul: NSObject {
     return incomingSoul
   }
   
-  class func seedSoul() -> Soul {
-    let seed = Soul()
-    seed.s3Key = "1428104002"
-    seed.epoch = 14932432
-    seed.longitude = -93.2783
-    seed.latitude = 44.9817
-    seed.token = Device.seedDevice().token
-    return seed
-  }
 }

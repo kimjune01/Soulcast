@@ -18,7 +18,7 @@ protocol OutgoingVCDelegate {
 
 class OutgoingVC: UIViewController {
   
-  var buttonSize:CGFloat = screenWidth * 2/3
+  var buttonSize:CGFloat = screenWidth * 1/3
   var outgoingButton: SimpleOutgoingButton!
   var outgoingSoul:Soul?
   var recordingStartTime:NSDate!
@@ -54,7 +54,6 @@ class OutgoingVC: UIViewController {
   }
   
   func configureNetworking() {
-    singleSoulCaster = SoulCaster()
     singleSoulCaster.delegate = self
   }
   

@@ -25,7 +25,7 @@
 		3990C94C1AB38D0E0029F087 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3990C94B1AB38D0E0029F087 /* MapKit.framework */; };
 		3990C94E1AB38EE80029F087 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3990C94D1AB38EE80029F087 /* CoreLocation.framework */; };
 		3990C9501AB390A80029F087 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C94F1AB390A80029F087 /* MapVC.swift */; };
-		3990C9541AB3A0520029F087 /* OutgoingButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9531AB3A0520029F087 /* OutgoingButtonVC.swift */; };
+		3990C9541AB3A0520029F087 /* OutgoingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9531AB3A0520029F087 /* OutgoingVC.swift */; };
 		3990C9561AB3A2350029F087 /* Soul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9551AB3A2350029F087 /* Soul.swift */; };
 		3990C9581AB3A3970029F087 /* SoulRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9571AB3A3970029F087 /* SoulRecorder.swift */; };
 		3990C95A1AB3A39F0029F087 /* SoulPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3990C9591AB3A39F0029F087 /* SoulPlayer.swift */; };
@@ -34,6 +34,8 @@
 		39A44E1B1AD057A500539CFE /* SoulPusher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E1A1AD057A500539CFE /* SoulPusher.swift */; };
 		39A44E1D1AD06F8600539CFE /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E1C1AD06F8600539CFE /* Device.swift */; };
 		39A44E2E1AD1017E00539CFE /* IncomingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E2D1AD1017E00539CFE /* IncomingVC.swift */; };
+		39AAECF41AD1070600E9C0FA /* SoulTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AAECF31AD1070600E9C0FA /* SoulTester.swift */; };
+		39AAECF61AD10F3A00E9C0FA /* SoulStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AAECF51AD10F3A00E9C0FA /* SoulStack.swift */; };
 		39D4D6161ABA75D700597CCA /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6081ABA75D700597CCA /* Array.swift */; };
 		39D4D6171ABA75D700597CCA /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D6091ABA75D700597CCA /* Dictionary.swift */; };
 		39D4D6181ABA75D700597CCA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4D60A1ABA75D700597CCA /* String.swift */; };
@@ -86,7 +88,7 @@
 		3990C94B1AB38D0E0029F087 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3990C94D1AB38EE80029F087 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3990C94F1AB390A80029F087 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MapVC.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		3990C9531AB3A0520029F087 /* OutgoingButtonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingButtonVC.swift; sourceTree = "<group>"; };
+		3990C9531AB3A0520029F087 /* OutgoingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingVC.swift; sourceTree = "<group>"; };
 		3990C9551AB3A2350029F087 /* Soul.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Soul.swift; sourceTree = "<group>"; };
 		3990C9571AB3A3970029F087 /* SoulRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulRecorder.swift; sourceTree = "<group>"; };
 		3990C9591AB3A39F0029F087 /* SoulPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulPlayer.swift; sourceTree = "<group>"; };
@@ -95,6 +97,8 @@
 		39A44E1A1AD057A500539CFE /* SoulPusher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulPusher.swift; sourceTree = "<group>"; };
 		39A44E1C1AD06F8600539CFE /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		39A44E2D1AD1017E00539CFE /* IncomingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingVC.swift; sourceTree = "<group>"; };
+		39AAECF31AD1070600E9C0FA /* SoulTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulTester.swift; sourceTree = "<group>"; };
+		39AAECF51AD10F3A00E9C0FA /* SoulStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulStack.swift; sourceTree = "<group>"; };
 		39D4D6081ABA75D700597CCA /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		39D4D6091ABA75D700597CCA /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		39D4D60A1ABA75D700597CCA /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				3934AB521AB3821600941344 /* AppDelegate.swift */,
+				39AAECF31AD1070600E9C0FA /* SoulTester.swift */,
 				395EF6F11ACC92230020441A /* Constants.swift */,
 				39601F7D1AB400E900B52C1D /* ViewControllers */,
 				39601F7E1AB400FD00B52C1D /* Soul */,
@@ -205,7 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				3934AB571AB3821600941344 /* ViewController.swift */,
-				3990C9531AB3A0520029F087 /* OutgoingButtonVC.swift */,
+				3990C9531AB3A0520029F087 /* OutgoingVC.swift */,
 				39A44E2D1AD1017E00539CFE /* IncomingVC.swift */,
 				3990C94F1AB390A80029F087 /* MapVC.swift */,
 			);
@@ -221,6 +226,7 @@
 				3990C95B1AB3A3A60029F087 /* SoulCaster.swift */,
 				39601F741AB3FD1400B52C1D /* SoulCatcher.swift */,
 				39A44E1A1AD057A500539CFE /* SoulPusher.swift */,
+				39AAECF51AD10F3A00E9C0FA /* SoulStack.swift */,
 				395F22E31ABB6C4D00DFF05B /* SwiftJK.swift */,
 			);
 			name = Soul;
@@ -436,6 +442,7 @@
 				395EF6EE1ACC79D00020441A /* SimpleOutgoingButton.swift in Sources */,
 				39A44E2E1AD1017E00539CFE /* IncomingVC.swift in Sources */,
 				39601F791AB400B100B52C1D /* SomeObject.m in Sources */,
+				39AAECF41AD1070600E9C0FA /* SoulTester.swift in Sources */,
 				3934AB531AB3821600941344 /* AppDelegate.swift in Sources */,
 				39D4D6211ABA75D700597CCA /* Range.swift in Sources */,
 				39601F751AB3FD1400B52C1D /* SoulCatcher.swift in Sources */,
@@ -456,10 +463,11 @@
 				39D4D61C1ABA75D700597CCA /* ExSwift.swift in Sources */,
 				39D4D61F1ABA75D700597CCA /* NSArray.swift in Sources */,
 				39D4D6171ABA75D700597CCA /* Dictionary.swift in Sources */,
-				3990C9541AB3A0520029F087 /* OutgoingButtonVC.swift in Sources */,
+				3990C9541AB3A0520029F087 /* OutgoingVC.swift in Sources */,
 				39A44E191ACFC9E700539CFE /* DeviceManager.swift in Sources */,
 				39D4D61D1ABA75D700597CCA /* Float.swift in Sources */,
 				3990C9581AB3A3970029F087 /* SoulRecorder.swift in Sources */,
+				39AAECF61AD10F3A00E9C0FA /* SoulStack.swift in Sources */,
 				39D4D6181ABA75D700597CCA /* String.swift in Sources */,
 				39D4D6201ABA75D700597CCA /* NSDate.swift in Sources */,
 				3990C9501AB390A80029F087 /* MapVC.swift in Sources */,

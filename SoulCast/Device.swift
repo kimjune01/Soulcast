@@ -42,12 +42,5 @@ class Device: NSObject {
     return wrapperParams
   }
   
-  class func seedDevice() -> Device {
-    let seed = Device()
-    seed.token = "e35c22814ff6b5217ac3823403a59bdc958fc9e20ef865b322546b1afefd552a"
-    seed.longitude = -93.2783
-    seed.latitude = 44.9817
-    seed.arn = "arn:aws:sns:us-east-1:503476828113:endpoint/APNS_SANDBOX/Soulcast_Development/a08b89b5-3015-3d4b-a14a-f0e657fffedb"
-    return seed
-  }
+
 }

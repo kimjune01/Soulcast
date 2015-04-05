@@ -50,18 +50,17 @@ class MapVC: UIViewController {
   
   func saveRegionDataToUserDefaults() {
     if let location = latestLocation {
-      let locationDictionary:NSDictionary = NSDictionary(dictionary: [
-        "latitude": location.coordinate.latitude as Double,
-        "longitude": location.coordinate.longitude as Double])
-      NSUserDefaults.standardUserDefaults().setValue(locationDictionary, forKey: "locationDictionary")
-      deviceManager.register(Device.localDevice())
+      if let span = userSpan {
+        let locationDictionary:NSDictionary = NSDictionary(dictionary: [
+          "latitude": location.coordinate.latitude as Double,
+          "longitude": location.coordinate.longitude as Double,
+          "latitudeDelta": span.latitudeDelta as Double,
+          "longitudeDelta": span.longitudeDelta as Double])
+        NSUserDefaults.standardUserDefaults().setValue(locationDictionary, forKey: "locationDictionary")
+        deviceManager.register(Device.localDevice())
+      }
     }
-    if let span = userSpan {
-      let spanDictionary: NSDictionary = NSDictionary(dictionary: [
-        "latitudeDelta": span.latitudeDelta as Double,
-        "longitudeDelta": span.longitudeDelta as Double])
-      NSUserDefaults.standardUserDefaults().setValue(spanDictionary, forKey: "locationDictionary")
-    }
+
   }
 
   func addMap() {
@@ -99,8 +98,8 @@ class MapVC: UIViewController {
     case .Ended:
       var latitudeDelta = Double(originalRegion!.span.latitudeDelta) / Double(pinchRecognizer.scale)
       var longitudeDelta = Double(originalRegion!.span.longitudeDelta) / Double(pinchRecognizer.scale);
-      latitudeDelta = max(min(latitudeDelta, 10), 0.01);
-      longitudeDelta = max(min(longitudeDelta, 10), 0.01);
+      latitudeDelta = max(min(latitudeDelta, 10), 0.005);
+      longitudeDelta = max(min(longitudeDelta, 10), 0.005);
       userSpan = MKCoordinateSpanMake(latitudeDelta, longitudeDelta)
       self.mapView.setRegion(MKCoordinateRegionMake(originalRegion!.center, userSpan!), animated: false)
       break

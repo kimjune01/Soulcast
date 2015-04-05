@@ -7,7 +7,8 @@
 //
 
 enum UploaderState {
-  case Unknown
+  case NotReady
+  case Standby
   case Uploading
   case Failed
   case Finished
@@ -34,20 +35,23 @@ class SoulCaster: NSObject {
   var outgoingSoul:Soul?
   var delegate:SoulCasterDelegate?
   
-  var soulCasterState:UploaderState = .Unknown {
+  var state:UploaderState = .NotReady {
     didSet {
-      switch (oldValue, soulCasterState) {
-      case (.Unknown, .Uploading):
+      switch (oldValue, state) {
+      case (.Standby, .Uploading):
         break
         
       case (.Uploading, .Finished):
+        NSNotificationCenter.defaultCenter().postNotificationName("uploadingFinished", object: nil)
         break
-        //notifyDelegate()
-      case (.Finished, .Unknown):
+        
+      case (.Finished, .Standby):
         break
-        //reset()
+        
       case (let x, .Failed):
         println("soulCasterState x.hashValue: \(x.hashValue)")
+      case (let x, .NotReady):
+        break
       default:
         assert(false, "OOPS!!!")
       }
@@ -57,6 +61,21 @@ class SoulCaster: NSObject {
   override init() {
     super.init()
     setup()
+//    let reachability = Reachability()
+//    if reachability.isReachable() {
+//      self.state = .Standby
+//      setup()
+//    } else {
+//      state = .NotReady
+//    }
+//    reachability.reachableBlock = { (reachBlock:Reachability!) in
+//      self.state = .Standby
+//      self.setup()
+//    }
+//    reachability.unreachableBlock = { (reachBlock:Reachability!) in
+//      self.state = .NotReady
+//    }
+//    reachability.startNotifier()
   }
   
   func setup() {
@@ -69,6 +88,9 @@ class SoulCaster: NSObject {
   }
   
   func upload(localSoul:Soul) {
+//    if state != .Standby {
+//      assert(false, "tried to upload in a bad state! \(state.hashValue)")
+//    }
     self.outgoingSoul = localSoul
     assert(localSoul.localURL != nil, "There's nothing to upload!!!")
     self.uploadFileURL = NSURL(fileURLWithPath: localSoul.localURL!)
@@ -97,6 +119,7 @@ class SoulCaster: NSObject {
           
           self.uploadTask = self.session?.uploadTaskWithRequest(request, fromFile: self.uploadFileURL!)
           self.uploadTask?.resume()
+          self.state = .Uploading
           self.delegate?.soulDidStartUploading()
         }
       }
@@ -147,13 +170,17 @@ extension SoulCaster: NSURLSessionTaskDelegate {
     //finished
     if let tempDelegate = self.delegate? {
       if (error == nil) {
+        self.state = .Finished
         dispatch_async(dispatch_get_main_queue()) {
           tempDelegate.soulDidFinishUploading()
+          self.state = .Standby
         }
         //castSoulToServer(outgoingSoul!)
       } else {
+        self.state = .Failed
         dispatch_async(dispatch_get_main_queue()) {
           tempDelegate.soulDidFailToUpload()
+          self.state = .Standby
         }
       }
     }
@@ -172,7 +199,7 @@ extension SoulCaster: NSURLSessionDelegate {
       completionHandler
     }
     
-    println("Completion Handler has been invoked, background upload task has finished.")
+    println("URLSessionDidFinishEventsForBackgroundURLSession Completion Handler has been invoked, background upload task has finished.")
   }
 }
 

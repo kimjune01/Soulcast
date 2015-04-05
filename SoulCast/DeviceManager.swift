@@ -2,19 +2,19 @@
 let deviceManager = DeviceManager()
 
 class DeviceManager: NSObject {
+  var tempDevice: Device!
+
   
   func registerDeviceLocally(#device: Device) {
     NSUserDefaults.standardUserDefaults().setValue(device.token, forKey: "token")
   }
   
   func register(device: Device) {    //do once per lifetime.
-    struct Holder {
-      static var tempDevice = device
-    }
+    tempDevice = device
     AWSSNS.defaultSNS().createPlatformEndpoint(self.createPlatformEndpointInput(device)).continueWithSuccessBlock { (task:BFTask!) -> AnyObject! in
       let endpointResponse = task.result as AWSSNSCreateEndpointResponse
-      Holder.tempDevice.arn = endpointResponse.endpointArn
-      self.registerWithServer(Holder.tempDevice)
+      self.tempDevice.arn = endpointResponse.endpointArn
+      self.registerWithServer(self.tempDevice)
       return nil
     }
   }

@@ -18,13 +18,40 @@ class MapVC: UIViewController {
   let mapView = MKMapView()
   let locationManager = CLLocationManager()
   var permissionView: UIView!
-  var latestLocation: CLLocation?
-  var userSpan: MKCoordinateSpan?
+  var latestLocation: CLLocation? {
+    get {
+      if let savedLatitude = Device.localDevice.latitude {
+        if let savedLongitude = Device.localDevice.longitude {
+          return CLLocation(latitude: savedLatitude, longitude: savedLongitude)
+        }
+      }
+      return CLLocation(latitude: 49.2812277842772, longitude: -122.956074765067)
+    }
+    set (newValue) {
+      let updatingDevice = Device.localDevice
+      updatingDevice.latitude = newValue?.coordinate.latitude
+      updatingDevice.longitude = newValue?.coordinate.longitude
+      Device.localDevice = updatingDevice
+    }
+  }
+  var userSpan: MKCoordinateSpan! {
+    get {
+      if let savedRadius = Device.localDevice.radius {
+        return MKCoordinateSpanMake(savedRadius, savedRadius)
+      } else {
+        return MKCoordinateSpanMake(0.3, 0.3)
+      }
+    }
+    set (newValue) {
+      let updatingDevice = Device.localDevice
+      updatingDevice.radius = newValue.latitudeDelta
+      Device.localDevice = updatingDevice
+    }
+  }
   var originalRegion: MKCoordinateRegion?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    retrieveRegionDataFromUserDefaults()
     addMap()
     monitorLocation()
   }
@@ -33,34 +60,13 @@ class MapVC: UIViewController {
     manualAskLocationPermission()
   }
   
-  func retrieveRegionDataFromUserDefaults() {
-    
-    if let locationDictionary: NSDictionary =
-      NSUserDefaults.standardUserDefaults().valueForKey("locationDictionary") as? NSDictionary {
-      userSpan = MKCoordinateSpanMake(
-        locationDictionary["latitudeDelta"] as Double,
-        locationDictionary["longitudeDelta"] as Double)
-      latestLocation = CLLocation(
-        latitude: locationDictionary["latitude"] as Double,
-        longitude: locationDictionary["longitude"] as Double)
-    } else {
-      userSpan = MKCoordinateSpanMake(0.3, 0.3)
-    }
-  }
   
-  func saveRegionDataToUserDefaults() {
+  func saveRegionData() {
     if let location = latestLocation {
       if let span = userSpan {
-        let locationDictionary:NSDictionary = NSDictionary(dictionary: [
-          "latitude": location.coordinate.latitude as Double,
-          "longitude": location.coordinate.longitude as Double,
-          "latitudeDelta": span.latitudeDelta as Double,
-          "longitudeDelta": span.longitudeDelta as Double])
-        NSUserDefaults.standardUserDefaults().setValue(locationDictionary, forKey: "locationDictionary")
-        deviceManager.register(Device.localDevice())
+        deviceManager.updateDeviceRegion(latitude: location.coordinate.latitude as Double, longitude: location.coordinate.longitude as Double, radius: span.latitudeDelta as Double)
       }
     }
-
   }
 
   func addMap() {
@@ -77,8 +83,7 @@ class MapVC: UIViewController {
     }
     mapView.delegate = self
     view.addSubview(mapView)
-
-    //
+    
     addPinchGestureRecognizer()
   }
   
@@ -88,20 +93,19 @@ class MapVC: UIViewController {
   }
   
   func didPanOnMapView(pinchRecognizer:UIPinchGestureRecognizer) {
-    println("pinchRecognizer.scale: \(pinchRecognizer.scale)")
-    
     switch pinchRecognizer.state {
     case .Began:
       originalRegion = mapView.region
     case .Changed:
-      fallthrough
-    case .Ended:
       var latitudeDelta = Double(originalRegion!.span.latitudeDelta) / Double(pinchRecognizer.scale)
       var longitudeDelta = Double(originalRegion!.span.longitudeDelta) / Double(pinchRecognizer.scale);
       latitudeDelta = max(min(latitudeDelta, 10), 0.005);
       longitudeDelta = max(min(longitudeDelta, 10), 0.005);
       userSpan = MKCoordinateSpanMake(latitudeDelta, longitudeDelta)
       self.mapView.setRegion(MKCoordinateRegionMake(originalRegion!.center, userSpan!), animated: false)
+    case .Ended:
+      saveRegionData()
+      
       break
     default:
     break
@@ -168,7 +172,6 @@ class MapVC: UIViewController {
     if locationManager.respondsToSelector("requestWhenInUseAuthorization") {
       locationManager.requestWhenInUseAuthorization()
     }
-
   }
   
   override func didReceiveMemoryWarning() {
@@ -194,8 +197,6 @@ extension MapVC: MKMapViewDelegate {
   func mapView(mapView: MKMapView!, regionWillChangeAnimated animated: Bool) {
     //
   }
-  //TODO: when mapkit did zoom or pinch
-  //save new region.
 }
 
 extension MapVC: CLLocationManagerDelegate {
@@ -204,16 +205,15 @@ extension MapVC: CLLocationManagerDelegate {
     if let previousLocation = latestLocation {
       let distance = (locations.last as? CLLocation)?.distanceFromLocation(previousLocation)
       if distance > 50 {
-        //update map.
+        
       } else {
         //do nothing interesting
       }
     }
     manager.stopUpdatingLocation()
     NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "restartLocationUpdates:", userInfo: nil, repeats: false)
-    
     latestLocation = locations.last as? CLLocation
-    saveRegionDataToUserDefaults()
+    saveRegionData()
   }
   
   func restartLocationUpdates(timer: NSTimer) {

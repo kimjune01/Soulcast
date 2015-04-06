@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       break
     case .Active:
       //called when a soul is received while app is open.
+      println("didReceiveRemoteNotification Active!!!")
       soulCatcher.catch(userInfo)
       completionHandler(.NewData)
       break
@@ -134,10 +135,15 @@ extension AppDelegate {
   
   func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
     let tokenString = tokenStringFrom(data: deviceToken)
-    println("tokenString: \(tokenString)")
-    let newLocalDevice = Device()
-    newLocalDevice.token = tokenString
-    deviceManager.registerDeviceLocally(device: newLocalDevice)
+    let localDevice = Device.localDevice
+    if let oldToken = Device.localDevice.token { // we were here before
+      
+    } else {
+      localDevice.token = tokenString
+      Device.localDevice = localDevice
+      deviceManager.register(localDevice)
+    }
+    
   }
   
   func tokenStringFrom(#data:NSData) -> String {

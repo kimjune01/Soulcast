@@ -61,7 +61,7 @@ class SoulCaster: NSObject {
   override init() {
     super.init()
     setup()
-//    let reachability = Reachability()
+//    let reachability = Reachability(hostName: serverURL)
 //    if reachability.isReachable() {
 //      self.state = .Standby
 //      setup()
@@ -119,7 +119,7 @@ class SoulCaster: NSObject {
           
           self.uploadTask = self.session?.uploadTaskWithRequest(request, fromFile: self.uploadFileURL!)
           self.uploadTask?.resume()
-          self.state = .Uploading
+          //self.state = .Uploading
           self.delegate?.soulDidStartUploading()
         }
       }
@@ -154,7 +154,6 @@ class SoulCaster: NSObject {
 extension SoulCaster: NSURLSessionDataDelegate {
   func URLSession(session: NSURLSession, task: NSURLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
     let progress = Float(totalBytesSent) / Float(totalBytesExpectedToSend)
-    println("Soul upload progress: \(progress)")
     self.uploadProgress = progress
     if let tempDelegate = self.delegate? {
       dispatch_async(dispatch_get_main_queue()) {
@@ -170,17 +169,17 @@ extension SoulCaster: NSURLSessionTaskDelegate {
     //finished
     if let tempDelegate = self.delegate? {
       if (error == nil) {
-        self.state = .Finished
+        //self.state = .Finished
         dispatch_async(dispatch_get_main_queue()) {
           tempDelegate.soulDidFinishUploading()
-          self.state = .Standby
+          //self.state = .Standby
         }
         //castSoulToServer(outgoingSoul!)
       } else {
-        self.state = .Failed
+        //self.state = .Failed
         dispatch_async(dispatch_get_main_queue()) {
           tempDelegate.soulDidFailToUpload()
-          self.state = .Standby
+          //self.state = .Standby
         }
       }
     }
@@ -213,7 +212,7 @@ extension SoulCaster {
     
     manager.POST(serverURL + newSoulSuffix, parameters: params, success: { (operation: AFHTTPRequestOperation!, returnObject: AnyObject!) -> Void in
       self.delegate?.soulDidReachServer()
-      println("castSoulToServer operation: \(operation) returnObject: \(returnObject)")
+      println("castSoulToServer successful!")
       }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
         println("castSoulToServer operation: \(operation) error: \(error)")
     }

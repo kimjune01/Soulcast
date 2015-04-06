@@ -1,6 +1,7 @@
 import Foundation
 
 class Device: NSObject {
+  var id: Int?
   var token: String!
   var longitude: Double?
   var latitude: Double?

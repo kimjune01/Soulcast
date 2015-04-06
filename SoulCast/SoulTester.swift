@@ -10,6 +10,9 @@ let soulTester = SoulTester()
 
 class SoulTester: NSObject {
   
+  let soulPlayer = SoulPlayer()
+
+  
   func setup() {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "uploadingFinished", name: "uploadingFinished", object: nil)
   }
@@ -21,6 +24,19 @@ class SoulTester: NSObject {
     seed.longitude = -93.2783
     seed.latitude = 44.9817
     seed.token = seedDevice().token
+    return seed
+  }
+  
+  func soulIncomingSeed() -> Soul {
+    let seed = Soul()
+    seed.s3Key = "1428283167"
+    seed.epoch = 1428283167
+    seed.longitude = -122.956074765067
+    seed.latitude = 49.281255654105202
+    seed.radius = 0.10652049519712301
+    let incomingDevice = Device()
+    incomingDevice.id = 1
+    seed.device = incomingDevice
     return seed
   }
   
@@ -46,8 +62,31 @@ class SoulTester: NSObject {
   func testIncoming(userInfo:NSDictionary) {
     println("testIncoming userInfo: \(userInfo)")
     soulCatcher.catch(userInfo)
-    //soulcatcher
+    
   }
   
+  func testPlayingIncomingSoul() {
+    soulPlayer.delegate = self
+    
+  }
+  
+  func getObjectRequest() -> AWSS3GetObjectRequest {
+    let request = AWSS3GetObjectRequest()
+    request.bucket = S3BucketName
+    request.key = soulIncomingSeed().s3Key! + ".mp3"
+    
+    return request
+  }
+  
+}
+
+extension SoulTester: SoulPlayerDelegate {
+  func soulDidFailToPlay() {
+    //
+  }
+  
+  func soulDidFinishPlaying(localSoul: Soul) {
+    //
+  }
   
 }

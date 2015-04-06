@@ -136,8 +136,7 @@ class OutgoingVC: UIViewController {
   
   func playbackSoul(localSoul:Soul) {
     println("playbackSoul localSoul:\(localSoul)")
-    soulPlayer.localSoul = localSoul
-    soulPlayer.startPlaying()
+    soulPlayer.startPlaying(localSoul)
   }
   
   func disableButtonUI() {

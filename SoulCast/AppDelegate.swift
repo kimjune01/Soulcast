@@ -18,24 +18,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   var backgroundUploadSessionCompletionHandler: ()?
   var backgroundDownloadSessionCompletionHandler: ()?
+  let reachabilityManager = AFNetworkReachabilityManager()
+  let reachability = Reachability(hostName: serverURL)
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    
     if window == nil {
       window = UIWindow(frame: UIScreen.mainScreen().bounds)
     }
     self.window?.rootViewController = ViewController()
     self.window?.makeKeyAndVisible()
+    
     setupReachability()
     setupAWS()
     registerForPush()
     if launchOptions != nil {
-      soulTester.setup()
-      soulTester.testIncoming(launchOptions as NSDictionary!)
-      
+//      soulCatcher.catch(launchOptions as [NSObject : AnyObject]!)
     } else {
       println("launching without options! Attempting to test models here.")
-      
+      soulTester.testPlayingIncomingSoul()
     }
     
     return true
@@ -53,33 +53,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       break
     case .Active:
       //called when a soul is received while app is open.
+      soulCatcher.catch(userInfo)
       completionHandler(.NewData)
       break
 
     }
-    
     //TODO: check for action from userInfo
-    println("application didReceiveRemoteNotification")
-    soulTester.testIncoming(userInfo)
-    //TODO: start downloading the soul from S3.
     
+    //soulTester.testIncoming(userInfo)
   }
 }
 
 extension AppDelegate { //Networking
   
   func setupReachability() {
-    let reachability = Reachability(hostName: serverURL)
-    reachability.reachableBlock = { (reachBlock:Reachability!) in
-      //show alert, saying that it's reachable.
-      NSNotificationCenter.defaultCenter().postNotificationName("nowReachable", object: nil)
-    }
-    reachability.unreachableBlock = { (unreachBlock: Reachability!) in
-      NSNotificationCenter.defaultCenter().postNotificationName("nowUnreachable", object: nil)
-      //show alert, saying that it's unreachable.
-    }
-    reachability.startNotifier()
+//    reachability.reachableBlock = { (reachBlock:Reachability!) in
+//      //show alert, saying that it's reachable.
+//      NSNotificationCenter.defaultCenter().postNotificationName("nowReachable", object: nil)
+//    }
+//    reachability.unreachableBlock = { (unreachBlock: Reachability!) in
+//      NSNotificationCenter.defaultCenter().postNotificationName("nowUnreachable", object: nil)
+//      //show alert, saying that it's unreachable.
+//    }
+//    reachability.startNotifier()
     
+//    
+//    if reachabilityManager.reachable {
+//      println("reachable")
+//    } else {
+//      println("unreachable")
+//    }
+//    reachabilityManager.setReachabilityStatusChangeBlock { (status: AFNetworkReachabilityStatus) -> Void in
+//      switch status {
+//      case .NotReachable:
+//        fallthrough
+//      case .Unknown:
+//        println("Unreachable")
+//        break
+//      case .ReachableViaWiFi:
+//        fallthrough
+//      case .ReachableViaWWAN:
+//        println("Reachable")
+//        break
+//      }
+//    }
+//    reachabilityManager.startMonitoring()
   }
   
   func setupAWS() {

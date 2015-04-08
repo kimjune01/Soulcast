@@ -1,6 +1,6 @@
 
 class SwiftJK {
-
+  
 }
 
 func doOnce (taskName:String, task:() -> ()) -> (Bool) {
@@ -10,5 +10,20 @@ func doOnce (taskName:String, task:() -> ()) -> (Bool) {
     return true
   } else {
     return false
+  }
+}
+
+func networkRequestManager() -> AFHTTPRequestOperationManager {
+  let manager = AFHTTPRequestOperationManager()
+  manager.requestSerializer = AFJSONRequestSerializer(writingOptions: NSJSONWritingOptions.PrettyPrinted)
+  manager.responseSerializer = AFJSONResponseSerializer(readingOptions: NSJSONReadingOptions.MutableContainers)
+  return manager
+}
+
+var debugging = true
+
+func printline(string:String) {
+  if debugging {
+    println(string)
   }
 }

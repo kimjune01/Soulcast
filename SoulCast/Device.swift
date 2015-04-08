@@ -46,7 +46,7 @@ class Device: NSObject {
     }
   }
     
-  class func fromParams(incomingParams: NSDictionary) -> Device{
+  class func from(#incomingParams: NSDictionary) -> Device{
     var incomingDevice = Device()
     if incomingParams["type"] as? String == "incoming" {
       if let contentParams = incomingParams["device"] as? NSDictionary {

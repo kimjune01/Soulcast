@@ -8,29 +8,25 @@
 
 import UIKit
 
-protocol SoulPlayerDelegate {
-  func soulDidFinishPlaying(localSoul:Soul)
-  func soulDidFailToPlay()
-}
+let soulPlayer = SoulPlayer()
 
 class SoulPlayer: NSObject {
   var tempSoul: Soul!
   var player: AEAudioFilePlayer!
-  var delegate: SoulPlayerDelegate?
-
+  
   func startPlaying(soul:Soul!) {
     var error:NSError?
     tempSoul = soul
-    println("soul.localURL: \(soul.localURL!)")
+    printline("soul.localURL: \(soul.localURL!)")
     player = AEAudioFilePlayer.audioFilePlayerWithURL(NSURL(fileURLWithPath: soul.localURL!), audioController: audioController, error: &error) as? AEAudioFilePlayer
     if let e = error {
-      println("oh noes! playAudioAtPath error: \(e)")
-      delegate?.soulDidFailToPlay()
+      printline("oh noes! playAudioAtPath error: \(e)")
+      NSNotificationCenter.defaultCenter().postNotificationName("soulDidFailToPlay", object: self.tempSoul)
       return
     }
     player?.removeUponFinish = true
     player?.completionBlock = {
-      self.delegate?.soulDidFinishPlaying(self.tempSoul)
+      NSNotificationCenter.defaultCenter().postNotificationName("soulDidFinishPlaying", object: self.tempSoul)
       self.reset()
     }
     audioController.addChannels([player])

@@ -38,22 +38,32 @@ class Soul: NSObject {
   }
   
   
-  class func fromParams(incomingParams:NSDictionary) -> Soul {
+  class func from(#incomingParams:NSDictionary) -> Soul {
     println("fromParams incomingParams: \(incomingParams)")
     var incomingSoul = Soul()
     if incomingParams["type"] as? String == "incoming" {
       if let contentParams = incomingParams["soul"] as? NSDictionary {
-        incomingSoul.s3Key = contentParams["s3Key"] as? String
-        incomingSoul.epoch = contentParams["epoch"] as? Int
-        incomingSoul.longitude = contentParams["longitude"] as? Double
-        incomingSoul.latitude = contentParams["latitude"] as? Double
-        incomingSoul.radius = contentParams["radius"] as? Double
-        incomingSoul.token = contentParams["token"] as? String
+        incomingSoul = Soul.fromContentParams(contentParams)
       }
     } else {
-      assert(false, "Attempted to interpret a non-incoming Soul!")
+      assert(false, "Tried to interpret non-incoming params!")
     }
     return incomingSoul
+  }
+  
+  class func fromContentParams(contentParams:NSDictionary) -> Soul {
+    let contentSoul = Soul()
+    contentSoul.s3Key = contentParams["s3Key"] as? String
+    contentSoul.epoch = contentParams["epoch"] as? Int
+    contentSoul.latitude = (contentParams["latitude"] as NSString).doubleValue
+    contentSoul.longitude = (contentParams["longitude"] as NSString).doubleValue
+    contentSoul.radius = (contentParams["radius"] as NSString).doubleValue
+    if let deviceID = contentParams["device_id"] as? Int {
+      let device = Device()
+      device.id = deviceID
+      contentSoul.device = device
+    }
+    return contentSoul
   }
   
 }

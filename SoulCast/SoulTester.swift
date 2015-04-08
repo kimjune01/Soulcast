@@ -15,6 +15,10 @@ class SoulTester: NSObject {
   
   func setup() {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "uploadingFinished", name: "uploadingFinished", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "soulDidFailToPlay:", name: "soulDidFailToPlay", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "soulDidFinishPlaying:", name: "soulDidFinishPlaying", object: nil)
+    
+    
   }
   
   func soulSeed() -> Soul {
@@ -65,8 +69,13 @@ class SoulTester: NSObject {
     
   }
   
-  func testPlayingIncomingSoul() {
-    soulPlayer.delegate = self
+  func soulDidFailToPlay(notification:NSNotification) {
+    let failSoul = notification.object as Soul
+    
+  }
+  
+  func soulDidFinishPlaying(notification:NSNotification) {
+    let finishedSoul = notification.object as Soul
     
   }
   
@@ -76,17 +85,6 @@ class SoulTester: NSObject {
     request.key = soulIncomingSeed().s3Key! + ".mp3"
     
     return request
-  }
-  
-}
-
-extension SoulTester: SoulPlayerDelegate {
-  func soulDidFailToPlay() {
-    //
-  }
-  
-  func soulDidFinishPlaying(localSoul: Soul) {
-    //
   }
   
 }

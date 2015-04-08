@@ -26,7 +26,6 @@ class OutgoingVC: UIViewController {
   var soulCaster = singleSoulCaster
   var displayLink: CADisplayLink!
   
-  var soulPlayer = SoulPlayer()
   var oscilloscope = TPOscilloscopeLayer(audioController: audioController)
 
   var delegate: OutgoingVCDelegate?
@@ -47,10 +46,11 @@ class OutgoingVC: UIViewController {
   func configureAudio() {
     soulRecorder.delegate = self
     soulRecorder.setup()
-    soulPlayer.delegate = self
     var error:NSError?
     let result = audioController.start(&error)
     dump(error)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "soulDidFailToPlay:", name: "soulDidFailToPlay", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "soulDidFinishPlaying:", name: "soulDidFinishPlaying", object: nil)
   }
   
   func configureNetworking() {
@@ -201,31 +201,32 @@ extension OutgoingVC: SoulRecorderDelegate {
   }
 }
 
-extension OutgoingVC: SoulPlayerDelegate {
-  func soulDidFinishPlaying(localSoul:Soul) {
-    println("soulDidFinishPlaying")
-    //upload unless user cancels.
+extension OutgoingVC {
+  func soulDidFailToPlay(notification:NSNotification) {
+    let failSoul = notification.object as Soul
     
   }
-  func soulDidFailToPlay() {
-    //
+  
+  func soulDidFinishPlaying(notification:NSNotification) {
+    let finishedSoul = notification.object as Soul
+    
   }
 }
 
 extension OutgoingVC: SoulCasterDelegate {
   func soulDidStartUploading() {
-    println("soulDidStartUploading")
+    printline("soulDidStartUploading")
   }
   func soulIsUploading(progress:Float) { //main thread
-    println("soulIsUploading progress: \(progress)")
+    printline("soulIsUploading progress: \(progress)")
   }
   func soulDidFinishUploading() {
-    println("soulDidFinishUploading")
+    printline("soulDidFinishUploading")
   }
   func soulDidFailToUpload() {
-    println("soulDidFailToUpload")
+    printline("soulDidFailToUpload")
   }
   func soulDidReachServer() {
-    println("soulDidReachServer")
+    printline("soulDidReachServer")
   }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SoulCatcherDelegate {
-  func soulDidStartToDownload()
+  func soulDidStartToDownload(soul:Soul)
   func soulIsDownloading(progress:Float)
   func soulDidFinishDownloading(soul:Soul)
   func soulDidFailToDownload()
@@ -52,7 +52,6 @@ class SoulCatcher: NSObject {
   }
   
   func playAudioFrom(incomingSoul:Soul) {
-    let soulPlayer = SoulPlayer()
     soulPlayer.startPlaying(incomingSoul)
   }
   
@@ -83,7 +82,7 @@ class SoulCatcher: NSObject {
       let request = NSURLRequest(URL: presignedURL)
       self.downloadTask = self.session?.downloadTaskWithRequest(request)
       self.downloadTask?.resume()
-      self.delegate?.soulDidStartToDownload()
+      self.delegate?.soulDidStartToDownload(incomingSoul)
       return nil
     }
     
@@ -124,6 +123,8 @@ extension SoulCatcher: NSURLSessionDownloadDelegate {
         
       }
     }
+    
+    //TODO: notify that this soul is finished downloading
     self.playAudioFrom(self.catchingSoul!)
   }
   

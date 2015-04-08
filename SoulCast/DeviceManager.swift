@@ -20,7 +20,7 @@ class DeviceManager: NSObject {
       } else if task.error.domain == AWSSNSErrorDomain{
         if let errorInfo = task.error.userInfo as NSDictionary! {
           if errorInfo["Code"] as String! == "InvalidParameter" {
-            println("Code is invalid parameter!!!")
+            //
           }
         }
       } else {
@@ -47,20 +47,12 @@ class DeviceManager: NSObject {
   func registerWithServer(device:Device) {
     networkRequestManager().POST(serverURL + newDeviceSuffix, parameters: device.toParams(), success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
       // get ID and update to device
-      println("registerWithServer POST response: \(response.description)")
       self.updateLocalDeviceID((response as NSDictionary)["id"] as Int)
-      println("registerDevice POST Success! operation: \(operation), response: \(response)")
+      printline("registerDevice POST Success! operation: \(operation), response: \(response)")
       }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
         //
         println("registerDevice POST Failure! operation: \(operation), error: \(error.localizedDescription)")
     }
-  }
-  
-  private func networkRequestManager() -> AFHTTPRequestOperationManager {
-    let manager = AFHTTPRequestOperationManager()
-    manager.requestSerializer = AFJSONRequestSerializer(writingOptions: NSJSONWritingOptions.PrettyPrinted)
-    manager.responseSerializer = AFJSONResponseSerializer(readingOptions: NSJSONReadingOptions.MutableContainers)
-    return manager
   }
   
   func createPlatformEndpointInput(device:Device) -> AWSSNSCreatePlatformEndpointInput{
@@ -88,7 +80,7 @@ class DeviceManager: NSObject {
     if let deviceID = updatingDevice.id {
       let patchURLString = serverURL + "/api/devices/" + String(deviceID) + ".json"
       networkRequestManager().PATCH(patchURLString, parameters: updatingDevice.toParams(), success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-        println("updateDeviceRegion PATCH response: \(response)")
+        //printline("updateDeviceRegion PATCH response: \(response)")
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
           println("error: \(error)")
           assert(false, "updateDeviceRegion PATCH failed!")

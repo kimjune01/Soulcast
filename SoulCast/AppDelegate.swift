@@ -34,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if launchOptions != nil {
 //      soulCatcher.catch(launchOptions as [NSObject : AnyObject]!)
     } else {
-      println("launching without options! Attempting to test models here.")
-      soulTester.testPlayingIncomingSoul()
+      printline("launching without options! Attempting to test models here.")
+      
     }
     
     return true
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       break
     case .Active:
       //called when a soul is received while app is open.
-      println("didReceiveRemoteNotification Active!!!")
+      printline("didReceiveRemoteNotification Active!!!")
       soulCatcher.catch(userInfo)
       completionHandler(.NewData)
       break
@@ -113,11 +113,11 @@ extension AppDelegate { //Networking
       credentialsProvider: credentialsProvider)
     AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
     
-    println("credentialsProvider.getIdentityId(): \(credentialsProvider.getIdentityId())")
+    printline("credentialsProvider.getIdentityId(): \(credentialsProvider.getIdentityId())")
   }
   
   func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
-    println("AppDelegate application handleEventsForBackgroundURLSession")
+    printline("AppDelegate application handleEventsForBackgroundURLSession")
     if identifier == BackgroundSessionUploadIdentifier {
       self.backgroundUploadSessionCompletionHandler = completionHandler()
     } else if identifier == BackgroundSessionDownloadIdentifier {
@@ -156,7 +156,7 @@ extension AppDelegate {
   
   func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
     //
-    println("didFailToRegisterForRemoteNotificationsWithError error: \(error)")
+    printline("didFailToRegisterForRemoteNotificationsWithError error: \(error)")
   }
 
 }

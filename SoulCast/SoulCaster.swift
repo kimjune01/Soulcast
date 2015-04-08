@@ -204,20 +204,14 @@ extension SoulCaster: NSURLSessionDelegate {
 
 extension SoulCaster {
   func castSoulToServer(outgoingSoul:Soul) {
-    let manager = AFHTTPRequestOperationManager()
     var params = outgoingSoul.toParams(type: "outgoing")
     
-    manager.requestSerializer = AFJSONRequestSerializer(writingOptions: NSJSONWritingOptions.PrettyPrinted)
-    manager.responseSerializer = AFJSONResponseSerializer(readingOptions: NSJSONReadingOptions.MutableContainers)
-    
-    manager.POST(serverURL + newSoulSuffix, parameters: params, success: { (operation: AFHTTPRequestOperation!, returnObject: AnyObject!) -> Void in
+    networkRequestManager().POST(serverURL + newSoulSuffix, parameters: params, success: { (operation: AFHTTPRequestOperation!, returnObject: AnyObject!) -> Void in
       self.delegate?.soulDidReachServer()
       println("castSoulToServer successful!")
       }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
         println("castSoulToServer operation: \(operation) error: \(error)")
     }
-    
-
     
   }
   

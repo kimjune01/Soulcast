@@ -14,12 +14,12 @@ class DeviceManager: NSObject {
     tempDevice = device
     AWSSNS.defaultSNS().createPlatformEndpoint(self.createPlatformEndpointInput(device)).continueWithBlock { (task:BFTask!) -> AnyObject! in
       if task.error == nil {
-        let endpointResponse = task.result as AWSSNSCreateEndpointResponse
+        let endpointResponse = task.result as! AWSSNSCreateEndpointResponse
         self.tempDevice.arn = endpointResponse.endpointArn
         self.registerWithServer(self.tempDevice)
       } else if task.error.domain == AWSSNSErrorDomain{
         if let errorInfo = task.error.userInfo as NSDictionary! {
-          if errorInfo["Code"] as String! == "InvalidParameter" {
+          if errorInfo["Code"] as! String == "InvalidParameter" {
             //
           }
         }
@@ -47,7 +47,7 @@ class DeviceManager: NSObject {
   func registerWithServer(device:Device) {
     networkRequestManager().POST(serverURL + newDeviceSuffix, parameters: device.toParams(), success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
       // get ID and update to device
-      self.updateLocalDeviceID((response as NSDictionary)["id"] as Int)
+      self.updateLocalDeviceID((response as! NSDictionary)["id"] as! Int)
       printline("registerDevice POST Success! operation: \(operation), response: \(response)")
       }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
         //
@@ -83,7 +83,7 @@ class DeviceManager: NSObject {
         //printline("updateDeviceRegion PATCH response: \(response)")
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
           println("error: \(error)")
-          assert(false, "updateDeviceRegion PATCH failed!")
+          //assert(false, "updateDeviceRegion PATCH failed!")
           
       }
     }

@@ -12,7 +12,7 @@ let audioController = AEAudioController(audioDescription: AEAudioController.nonI
 
 class Soul: NSObject {
   var s3Key:String?
-  var localURL:NSString?
+  var localURL:String?
   var epoch:Int?
   var longitude:Double?
   var latitude:Double?
@@ -55,9 +55,9 @@ class Soul: NSObject {
     let contentSoul = Soul()
     contentSoul.s3Key = contentParams["s3Key"] as? String
     contentSoul.epoch = contentParams["epoch"] as? Int
-    contentSoul.latitude = (contentParams["latitude"] as NSString).doubleValue
-    contentSoul.longitude = (contentParams["longitude"] as NSString).doubleValue
-    contentSoul.radius = (contentParams["radius"] as NSString).doubleValue
+    contentSoul.latitude = (contentParams["latitude"] as! NSString).doubleValue
+    contentSoul.longitude = (contentParams["longitude"] as! NSString).doubleValue
+    contentSoul.radius = (contentParams["radius"] as! NSString).doubleValue
     if let deviceID = contentParams["device_id"] as? Int {
       let device = Device()
       device.id = deviceID

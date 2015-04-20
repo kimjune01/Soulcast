@@ -11,15 +11,15 @@ class Device: NSObject {
   class var localDevice:Device {
     get{
     let localDevice = Device()
-    localDevice.token = NSUserDefaults.standardUserDefaults().valueForKey("token") as String?
+    localDevice.token = NSUserDefaults.standardUserDefaults().valueForKey("token") as! String?
     if let locationDictionary: NSDictionary =
     NSUserDefaults.standardUserDefaults().valueForKey("locationDictionary") as? NSDictionary {
-    localDevice.longitude = locationDictionary["longitude"] as Double?
-    localDevice.latitude = locationDictionary["latitude"] as Double?
-    localDevice.radius = locationDictionary["radius"] as Double?
+    localDevice.longitude = locationDictionary["longitude"]as! Double?
+    localDevice.latitude = locationDictionary["latitude"] as! Double?
+    localDevice.radius = locationDictionary["radius"] as! Double?
     }
-    localDevice.id = NSUserDefaults.standardUserDefaults().valueForKey("id") as Int?
-    localDevice.arn = NSUserDefaults.standardUserDefaults().valueForKey("arn") as String?
+    localDevice.id = NSUserDefaults.standardUserDefaults().valueForKey("id") as! Int?
+    localDevice.arn = NSUserDefaults.standardUserDefaults().valueForKey("arn") as! String?
     return localDevice
     }
     set(newValue){

@@ -65,17 +65,17 @@ class SoulTester: NSObject {
   
   func testIncoming(userInfo:NSDictionary) {
     println("testIncoming userInfo: \(userInfo)")
-    soulCatcher.catch(userInfo)
+    soulCatcher.catch(userInfo: userInfo)
     
   }
   
   func soulDidFailToPlay(notification:NSNotification) {
-    let failSoul = notification.object as Soul
+    let failSoul = notification.object as! Soul
     
   }
   
   func soulDidFinishPlaying(notification:NSNotification) {
-    let finishedSoul = notification.object as Soul
+    let finishedSoul = notification.object as! Soul
     
   }
   

@@ -108,7 +108,7 @@ class SoulCaster: NSObject {
         NSLog("Error: %@", task.error)
       } else {
         
-        let presignedURL = task.result as NSURL!
+        let presignedURL = task.result as! NSURL!
         if (presignedURL != nil) {
           var request = NSMutableURLRequest(URL: presignedURL)
           request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
@@ -155,7 +155,7 @@ extension SoulCaster: NSURLSessionDataDelegate {
   func URLSession(session: NSURLSession, task: NSURLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
     let progress = Float(totalBytesSent) / Float(totalBytesExpectedToSend)
     self.uploadProgress = progress
-    if let tempDelegate = self.delegate? {
+    if let tempDelegate = self.delegate {
       dispatch_async(dispatch_get_main_queue()) {
         tempDelegate.soulIsUploading(progress)
       }
@@ -167,7 +167,7 @@ extension SoulCaster: NSURLSessionDataDelegate {
 extension SoulCaster: NSURLSessionTaskDelegate {
   func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
     //finished
-    if let tempDelegate = self.delegate? {
+    if let tempDelegate = self.delegate {
       if (error == nil) {
         //self.state = .Finished
         dispatch_async(dispatch_get_main_queue()) {
@@ -191,7 +191,7 @@ extension SoulCaster: NSURLSessionTaskDelegate {
 
 extension SoulCaster: NSURLSessionDelegate {
   func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     if ((appDelegate.backgroundUploadSessionCompletionHandler) != nil) {
       let completionHandler:() = appDelegate.backgroundUploadSessionCompletionHandler!;
       appDelegate.backgroundUploadSessionCompletionHandler = nil

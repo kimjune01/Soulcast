@@ -61,6 +61,6 @@ class SoulPusher: NSObject {
   //TODO: a function that takes in a device, sends a silent push, and determines whether it can catch, returns Bool
   
   func localToken() -> String {
-    return NSUserDefaults.standardUserDefaults().valueForKey("token") as String
+    return NSUserDefaults.standardUserDefaults().valueForKey("token") as! String
   }
 }

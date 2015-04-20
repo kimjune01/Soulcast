@@ -18,7 +18,7 @@ class SoulPlayer: NSObject {
     var error:NSError?
     tempSoul = soul
     printline("soul.localURL: \(soul.localURL!)")
-    player = AEAudioFilePlayer.audioFilePlayerWithURL(NSURL(fileURLWithPath: soul.localURL!), audioController: audioController, error: &error) as? AEAudioFilePlayer
+    player = AEAudioFilePlayer.audioFilePlayerWithURL(NSURL(fileURLWithPath: soul.localURL! as String), audioController: audioController, error: &error) as? AEAudioFilePlayer
     if let e = error {
       printline("oh noes! playAudioAtPath error: \(e)")
       NSNotificationCenter.defaultCenter().postNotificationName("soulDidFailToPlay", object: self.tempSoul)

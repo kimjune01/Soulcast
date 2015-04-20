@@ -1,10 +1,4 @@
-//
-//  AppDelegate.swift
-//  SoulCast
-//
-//  Created by Camvy Films on 2015-03-13.
-//  Copyright (c) 2015 June. All rights reserved.
-//
+
 
 import UIKit
 import CoreData
@@ -27,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     self.window?.rootViewController = ViewController()
     self.window?.makeKeyAndVisible()
+    
     
     setupReachability()
     setupAWS()
@@ -54,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     case .Active:
       //called when a soul is received while app is open.
       printline("didReceiveRemoteNotification Active!!!")
-      soulCatcher.catch(userInfo)
+      soulCatcher.catch(userInfo: userInfo)
       completionHandler(.NewData)
       break
 

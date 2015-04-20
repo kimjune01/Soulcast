@@ -203,12 +203,12 @@ extension OutgoingVC: SoulRecorderDelegate {
 
 extension OutgoingVC {
   func soulDidFailToPlay(notification:NSNotification) {
-    let failSoul = notification.object as Soul
+    let failSoul = notification.object as! Soul
     
   }
   
   func soulDidFinishPlaying(notification:NSNotification) {
-    let finishedSoul = notification.object as Soul
+    let finishedSoul = notification.object as! Soul
     
   }
 }

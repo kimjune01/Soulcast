@@ -178,7 +178,7 @@ class SimpleOutgoingButton: UIButton {
     roundedrectAnimGroup.animations.map{$0.setValue(kCAFillModeForwards, forKeyPath:"fillMode")}
     roundedrectAnimGroup.fillMode   = kCAFillModeForwards
     roundedrectAnimGroup.removedOnCompletion = false
-    roundedrectAnimGroup.duration = QCMethod.maxDurationFromAnimations(roundedrectAnimGroup.animations as [CAAnimation])
+    roundedrectAnimGroup.duration = QCMethod.maxDurationFromAnimations(roundedrectAnimGroup.animations as! [CAAnimation])
     
     
     return roundedrectAnimGroup
@@ -204,7 +204,7 @@ class SimpleOutgoingButton: UIButton {
     roundedrectAnimGroup.animations.map{$0.setValue(kCAFillModeForwards, forKeyPath:"fillMode")}
     roundedrectAnimGroup.fillMode   = kCAFillModeForwards
     roundedrectAnimGroup.removedOnCompletion = false
-    roundedrectAnimGroup.duration = QCMethod.maxDurationFromAnimations(roundedrectAnimGroup.animations as [CAAnimation])
+    roundedrectAnimGroup.duration = QCMethod.maxDurationFromAnimations(roundedrectAnimGroup.animations as! [CAAnimation])
     
     
     return roundedrectAnimGroup

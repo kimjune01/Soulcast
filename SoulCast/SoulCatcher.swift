@@ -21,28 +21,28 @@ class SoulCatcher: NSObject {
   var session: NSURLSession?
   var downloadTask: NSURLSessionDownloadTask?
   var catchingSoul: Soul?
+  var catchingSouls: [Soul] = []
   var delegate: SoulCatcherDelegate?
   
+  var token: dispatch_once_t = 0
+  
   func setup() {
-    var token: dispatch_once_t = 0
     dispatch_once(&token) {
       let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(BackgroundSessionDownloadIdentifier)
       self.session = NSURLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }
   }
   
-  func catch(userInfo:NSDictionary) {
-    setup()
+  func catch(#userInfo:NSDictionary) {
     if let apsHash: NSDictionary = userInfo["aps"] as? NSDictionary {
       if apsHash["type"] as? String == "incoming" {
-        println("Catching an incoming soul!")
-        catchingSoul = soulFromApsHash(apsHash)
-        startDownloadingAudioFrom(incomingSoul: catchingSoul!)
+        println("Catching an incoming aps soul!")
+        catch(incomingSoul: soulFromApsHash(apsHash))
         
       } else if apsHash["type"] as? String == "direct" {
-        println("Catching a directed soul!")
+        println("Catching a directed aps soul!")
         //TODO:
-        let directedSoul = soulFromApsHash(apsHash)
+        catch(incomingSoul: soulFromApsHash(apsHash))
       } else {
         assert(false, "Trying to catch a non-incoming soul!")
       }
@@ -51,12 +51,18 @@ class SoulCatcher: NSObject {
     //Get a reference to incoming VC, pass soul to incomingVC.
   }
   
+  func catch(#incomingSoul:Soul) {
+    setup()
+    catchingSouls.append(incomingSoul)
+    startDownloadingAudioFrom(incomingSoul: incomingSoul)
+  }
+  
   func playAudioFrom(incomingSoul:Soul) {
     soulPlayer.startPlaying(incomingSoul)
   }
   
   private func soulFromApsHash (apsHash:NSDictionary) -> Soul {
-    let soulHash = apsHash["soul"] as NSDictionary
+    let soulHash = apsHash["soul"] as! NSDictionary
     let incomingSoul = Soul()
     let incomingDevice = Device()
     incomingDevice.id = soulHash["device_id"] as? Int
@@ -76,11 +82,11 @@ class SoulCatcher: NSObject {
     
     AWSS3PreSignedURLBuilder.defaultS3PreSignedURLBuilder().getPreSignedURL(getPreSignedURLRequest(incomingSoul.s3Key! + ".mp3")).continueWithBlock { (task:BFTask!) -> (AnyObject!) in
       assert(task.error == nil, "task.error: \(task.error.localizedDescription)")
-      let presignedURL = task.result as NSURL!
+      let presignedURL = task.result as? NSURL
       assert(presignedURL != nil, "presigned URL is nil!!!")
-      println("presignedURL: \(presignedURL)")
-      let request = NSURLRequest(URL: presignedURL)
+      let request = NSURLRequest(URL: presignedURL!)
       self.downloadTask = self.session?.downloadTaskWithRequest(request)
+      self.downloadTask?.taskDescription = incomingSoul.s3Key!
       self.downloadTask?.resume()
       self.delegate?.soulDidStartToDownload(incomingSoul)
       return nil
@@ -113,19 +119,26 @@ extension SoulCatcher: NSURLSessionDownloadDelegate {
   }
 
   func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
-    NSLog("[%@ %@]", reflect(self).summary, __FUNCTION__)
-
-    let filePath = movedFileToDocuments(location, withKey:self.catchingSoul!.s3Key!)
-    catchingSoul?.localURL = filePath
+    
+    var finishedSoul:Soul!
+    for eachSoul in catchingSouls {
+      if downloadTask.taskDescription == eachSoul.s3Key! {
+        finishedSoul = eachSoul
+        break
+      }
+    }
+    
+    let filePath = movedFileToDocuments(location, withKey:finishedSoul.s3Key!)
+    finishedSoul.localURL = filePath
     if let catcherDelegate = self.delegate {
       dispatch_async(dispatch_get_main_queue()) {
-        catcherDelegate.soulDidFinishDownloading(self.catchingSoul!)
+        catcherDelegate.soulDidFinishDownloading(finishedSoul)
         
       }
     }
     
     //TODO: notify that this soul is finished downloading
-    self.playAudioFrom(self.catchingSoul!)
+    //self.playAudioFrom(self.catchingSoul!)
   }
   
   func movedFileToDocuments(location:NSURL, withKey:String) -> String {
@@ -156,7 +169,7 @@ extension SoulCatcher: NSURLSessionDelegate {
 
 extension SoulCatcher: NSURLSessionTaskDelegate {
   func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     if ((appDelegate.backgroundDownloadSessionCompletionHandler) != nil) {
       let completionHandler:() = appDelegate.backgroundDownloadSessionCompletionHandler!;
       appDelegate.backgroundDownloadSessionCompletionHandler = nil

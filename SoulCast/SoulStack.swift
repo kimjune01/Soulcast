@@ -12,8 +12,9 @@ protocol SoulStackDelegate {
   func stackDidFinishReloading()
 }
 
-let soulStack = SoulStack()
 
+let soulStack = SoulStack()
+///SoulStack, upon reload(), fetches a list of souls from the server and plays it top-to-bottom.
 class SoulStack: NSObject {
   
   var stack:[Soul] = [] //has no localURL.
@@ -27,12 +28,21 @@ class SoulStack: NSObject {
   }
   
   func pop() -> Soul? {
+    if let poppingSoul = stack.last {
+      stack.removeLast()
+      return poppingSoul
+    }
+    
     //TODO: download audio on the upcoming soul.
-    return stack.pop()
+    return nil
   }
   
   func push(soul:Soul) {
     stack.append(soul)
+  }
+  
+  func isEmpty() -> Bool {
+    return stack.count == 0
   }
   
   func reload() {
@@ -40,7 +50,7 @@ class SoulStack: NSObject {
     let params = Device.localDevice.toParams()
     networkRequestManager().GET(getSoulsInAreaURLString, parameters: params, success: { (operation:AFHTTPRequestOperation!, response:AnyObject!) -> Void in
       var souls: [Soul] = []
-      for eachSoulParams in response as [NSDictionary] {
+      for eachSoulParams in response as! [NSDictionary] {
         let eachSoul = Soul.fromContentParams(eachSoulParams)
         souls.append(eachSoul)
       }

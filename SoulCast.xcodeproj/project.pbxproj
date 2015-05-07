@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		390A916A1AE48FF4005AEB3A /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A91691AE48FF4005AEB3A /* PlayPauseButton.swift */; };
 		3913C9651AC4F2FC00128D06 /* OutgoingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3913C9641AC4F2FC00128D06 /* OutgoingButton.swift */; };
 		3913C9671AC4F32400128D06 /* QCMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3913C9661AC4F32400128D06 /* QCMethod.swift */; };
 		3934AB531AB3821600941344 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934AB521AB3821600941344 /* AppDelegate.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		390A91691AE48FF4005AEB3A /* PlayPauseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		3913C9641AC4F2FC00128D06 /* OutgoingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingButton.swift; sourceTree = "<group>"; };
 		3913C9661AC4F32400128D06 /* QCMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QCMethod.swift; sourceTree = "<group>"; };
 		3934AB4D1AB3821600941344 /* Soulcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soulcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +224,7 @@
 				3934AB591AB3821600941344 /* Main.storyboard */,
 				3913C9661AC4F32400128D06 /* QCMethod.swift */,
 				3913C9641AC4F2FC00128D06 /* OutgoingButton.swift */,
+				390A91691AE48FF4005AEB3A /* PlayPauseButton.swift */,
 				395EF6ED1ACC79D00020441A /* SimpleOutgoingButton.swift */,
 				39601F7A1AB400E100B52C1D /* TPOscilloscopeLayer.h */,
 				39601F7B1AB400E100B52C1D /* TPOscilloscopeLayer.m */,
@@ -403,6 +406,7 @@
 				3990C95A1AB3A39F0029F087 /* SoulPlayer.swift in Sources */,
 				3934AB561AB3821600941344 /* SoulCast.xcdatamodeld in Sources */,
 				3990C9561AB3A2350029F087 /* Soul.swift in Sources */,
+				390A916A1AE48FF4005AEB3A /* PlayPauseButton.swift in Sources */,
 				39601F7C1AB400E100B52C1D /* TPOscilloscopeLayer.m in Sources */,
 				39A44E1B1AD057A500539CFE /* SoulPusher.swift in Sources */,
 				3990C95C1AB3A3A60029F087 /* SoulCaster.swift in Sources */,

@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   let reachability = Reachability(hostName: serverURL)
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
     if window == nil {
       window = UIWindow(frame: UIScreen.mainScreen().bounds)
     }

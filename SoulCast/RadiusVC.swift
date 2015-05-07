@@ -4,10 +4,11 @@ import UIKit
 
 class RadiusVC: UIViewController {
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    //add a top left and top right label indicating the number of devices out there and my radius
     
-    // Do any additional setup after loading the view.
   }
   
   override func didReceiveMemoryWarning() {

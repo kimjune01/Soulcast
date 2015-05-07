@@ -31,9 +31,10 @@ class MapVC: UIViewController {
   var userSpan: MKCoordinateSpan! {
     get {
       if let savedRadius = Device.localDevice.radius {
+        
         return MKCoordinateSpanMake(savedRadius, savedRadius)
       } else {
-        return MKCoordinateSpanMake(0.3, 0.3)
+        return MKCoordinateSpanMake(0.03, 0.03)
       }
     }
     set (newValue) {
@@ -43,14 +44,24 @@ class MapVC: UIViewController {
     }
   }
   var originalRegion: MKCoordinateRegion?
+  var radiusLabel: UILabel!
+  var devicesLabel: UILabel!
+  var devicesLabelUpdating = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     addMap()
+    addLabels()
+    
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
     monitorLocation()
   }
   
   override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
     manualAskLocationPermission()
   }
   
@@ -65,14 +76,16 @@ class MapVC: UIViewController {
 
   func addMap() {
     mapView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height*0.9)
-    mapView.mapType = .Satellite
+    mapView.mapType = .Standard
     mapView.scrollEnabled = false
     mapView.rotateEnabled = false
     mapView.zoomEnabled = false
     mapView.showsUserLocation = true
     if let location = latestLocation {
       if let span = userSpan {
+        
         mapView.setRegion(MKCoordinateRegionMake(location.coordinate, span), animated: true)
+        
       }
     }
     mapView.delegate = self
@@ -93,9 +106,11 @@ class MapVC: UIViewController {
     case .Changed:
       var latitudeDelta = Double(originalRegion!.span.latitudeDelta) / Double(pinchRecognizer.scale)
       var longitudeDelta = Double(originalRegion!.span.longitudeDelta) / Double(pinchRecognizer.scale);
-      latitudeDelta = max(min(latitudeDelta, 10), 0.005);
-      longitudeDelta = max(min(longitudeDelta, 10), 0.005);
+      latitudeDelta = max(min(latitudeDelta, 10), 0.0005);
+      longitudeDelta = max(min(longitudeDelta, 10), 0.0005);
       userSpan = MKCoordinateSpanMake(latitudeDelta, longitudeDelta)
+      updateRadiusLabel(latitudeDelta)
+      updateDevicesLabel()
       self.mapView.setRegion(MKCoordinateRegionMake(originalRegion!.center, userSpan!), animated: false)
     case .Ended:
       saveRegionData()
@@ -114,6 +129,10 @@ class MapVC: UIViewController {
     locationManager.startUpdatingLocation()
   }
   
+  func hasLocationPermission() -> Bool {
+    return CLLocationManager.authorizationStatus() == .AuthorizedAlways || CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse
+  }
+  
   func manualAskLocationPermission() {
     if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
       //ask manually for permission.
@@ -124,6 +143,7 @@ class MapVC: UIViewController {
       })
       let successAction = UIAlertAction(title: "OK", style: .Default, handler: { (action:UIAlertAction!) -> Void in
         self.systemAskLocationPermission()
+        
       })
       locationAlert.addAction(cancelAction)
       locationAlert.addAction(successAction)
@@ -168,6 +188,55 @@ class MapVC: UIViewController {
     }
   }
   
+  func addLabels() {
+    radiusLabel = UILabel(frame: CGRect(x: view.frame.width - 180, y: 0, width: 180, height: 50))
+    radiusLabel.text = "Radius: " +  "  km"
+    radiusLabel.decorateWhite(15)
+    radiusLabel.textAlignment = .Right
+    view.addSubview(radiusLabel)
+    
+    devicesLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 160, height: 50))
+    devicesLabel.text = "No others nearby"
+    devicesLabel.decorateWhite(15)
+    devicesLabel.textAlignment = .Left
+    view.addSubview(devicesLabel)
+    updateDevicesLabel()
+  }
+  
+  func updateRadiusLabel(delta:Double) {
+    // one degree of latitude is always approximately 111 kilometers (69 miles).
+    radiusLabel.text = "Radius: " + String(format:"%.1f", (delta * 111 / 2)) + " km"
+    
+  }
+  
+  func updateDevicesLabel() {
+    if devicesLabelUpdating {
+      return
+    }
+    devicesLabelUpdating = true
+    if Device.localDevice.radius != nil {
+      networkRequestManager().GET(serverURL + othersQuerySuffix, parameters: Device.localDevice.toParams(), success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        self.devicesLabelUpdating = false
+        let params = response as! NSDictionary
+        let nearby = params["nearby"] as! Int
+        var newText = ""
+        if nearby == 0 {
+          newText = "No others nearby"
+        } else if nearby == 1 {
+          newText = String(nearby) + " other nearby"
+        } else {
+          newText = String(nearby) + " others nearby"
+        }
+        self.devicesLabel.text = newText
+        
+        }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+        println("updateDevicesLabel error: \(error)")
+      })
+    }
+  }
+  
+  
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -185,7 +254,7 @@ extension MapVC: MKMapViewDelegate {
   }
   
   func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
-    //
+    updateRadiusLabel(mapView.region.span.latitudeDelta)
   }
   
   func mapView(mapView: MKMapView!, regionWillChangeAnimated animated: Bool) {
@@ -208,6 +277,7 @@ extension MapVC: CLLocationManagerDelegate {
     NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "restartLocationUpdates:", userInfo: nil, repeats: false)
     latestLocation = locations.last as? CLLocation
     saveRegionData()
+    
   }
   
   func restartLocationUpdates(timer: NSTimer) {

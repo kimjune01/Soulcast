@@ -10,9 +10,9 @@ import UIKit
 
 class IncomingVC: UIViewController {
   
-  var barHeight:CGFloat = 50
+  var barHeight:CGFloat = 1
   var shouldPlayNext = true
-  var playButton:UIButton!
+  var playPauseButton:UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,7 +22,7 @@ class IncomingVC: UIViewController {
     soulStack.delegate = self
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "soulDidFinishPlaying:", name: "soulDidFinishPlaying", object: nil)
     
-    addPlayButton()
+    addPlayPauseButton()
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -32,16 +32,17 @@ class IncomingVC: UIViewController {
     
   }
   
-  func addPlayButton() {
-    playButton = UIButton(frame: view.bounds)
-    playButton.backgroundColor = UIColor.whiteColor()
-    playButton.addTarget(self, action: "didTapPlayButton:", forControlEvents: UIControlEvents.TouchUpInside)
-    view.addSubview(playButton)
+  func addPlayPauseButton() {
+    playPauseButton = UIButton(frame: view.bounds)
+    playPauseButton.backgroundColor = UIColor.greenColor()
+    playPauseButton.addTarget(self, action: "didTapPlayPauseButton:", forControlEvents: UIControlEvents.TouchUpInside)
+    view.addSubview(playPauseButton)
   }
   
-  func didTapPlayButton(button:UIButton) {
+  func didTapPlayPauseButton(button:UIButton) {
+    
     soulStack.reload()
-    button.hidden = true
+    button.backgroundColor = UIColor.blueColor()
     
   }
   
@@ -61,7 +62,7 @@ class IncomingVC: UIViewController {
           self.shouldPlayNext = false
         }
       } else if soulStack.isEmpty() {
-        playButton.hidden = false
+        playPauseButton.backgroundColor = UIColor.blueColor()
       }
       
       

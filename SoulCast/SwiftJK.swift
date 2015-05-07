@@ -27,3 +27,14 @@ func printline(string:String) {
     println(string)
   }
 }
+
+extension UILabel {
+  func decorateWhite(fontSize:CGFloat) {
+    self.textColor = UIColor.whiteColor()
+    self.shadowColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
+    self.shadowOffset = CGSize(width: 1, height: 1)
+    self.font = UIFont(name: "Helvetica", size: fontSize)
+    self.textAlignment = NSTextAlignment.Center
+    
+  }
+}

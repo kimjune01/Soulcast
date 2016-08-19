@@ -33,16 +33,16 @@ class SoulCatcher: NSObject {
     }
   }
   
-  func catch(#userInfo:NSDictionary) {
+  func catchSoul(userInfo:NSDictionary) {
     if let apsHash: NSDictionary = userInfo["aps"] as? NSDictionary {
       if apsHash["type"] as? String == "incoming" {
-        println("Catching an incoming aps soul!")
-        catch(incomingSoul: soulFromApsHash(apsHash))
+        print("Catching an incoming aps soul!")
+        catchSoul(incomingSoul: soulFromApsHash(apsHash))
         
       } else if apsHash["type"] as? String == "direct" {
-        println("Catching a directed aps soul!")
+        print("Catching a directed aps soul!")
         //TODO:
-        catch(incomingSoul: soulFromApsHash(apsHash))
+        catchSoul(incomingSoul: soulFromApsHash(apsHash))
       } else {
         assert(false, "Trying to catch a non-incoming soul!")
       }
@@ -51,7 +51,7 @@ class SoulCatcher: NSObject {
     //Get a reference to incoming VC, pass soul to incomingVC.
   }
   
-  func catch(#incomingSoul:Soul) {
+  func catchSoul(incomingSoul:Soul) {
     setup()
     catchingSouls.append(incomingSoul)
     startDownloadingAudioFrom(incomingSoul: incomingSoul)
@@ -75,7 +75,7 @@ class SoulCatcher: NSObject {
     return incomingSoul
   }
   
-  func startDownloadingAudioFrom(#incomingSoul: Soul) {
+  func startDownloadingAudioFrom(incomingSoul: Soul) {
     if (self.downloadTask != nil) {
       return
     }

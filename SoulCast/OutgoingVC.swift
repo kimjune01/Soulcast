@@ -19,7 +19,8 @@ protocol OutgoingVCDelegate {
 class OutgoingVC: UIViewController {
   
   var buttonSize:CGFloat = screenWidth * 1/3
-  var outgoingButton: SimpleOutgoingButton!
+      var outgoingButton: UIButton!
+    //  var outgoingButton: SimpleOutgoingButton!
   var outgoingSoul:Soul?
   var recordingStartTime:NSDate!
   var soulRecorder = SoulRecorder()
@@ -70,7 +71,7 @@ class OutgoingVC: UIViewController {
   }
   
   func outgoingButtonTouchedDown(button:UIButton) {
-    println("outgoingButtonTouchedDown")
+    print("outgoingButtonTouchedDown")
 
     
     ////
@@ -79,14 +80,14 @@ class OutgoingVC: UIViewController {
   }
   
   func outgoingButtonTouchedUpInside(button:UIButton) {
-    println("outgoingButtonTouchedUpInside")
+    print("outgoingButtonTouchedUpInside")
     //    outgoingButton.buttonState = .Enabled
     //    requestFinishRecording()
     requestStartRecording()
   }
   
   func outgoingButtonTouchDraggedExit(button:UIButton) {
-    println("outgoingButtonTouchDraggedExit")
+    print("outgoingButtonTouchDraggedExit")
     outgoingButton.buttonState = .Enabled
     requestFinishRecording()
   }
@@ -135,7 +136,7 @@ class OutgoingVC: UIViewController {
   }
   
   func playbackSoul(localSoul:Soul) {
-    println("playbackSoul localSoul:\(localSoul)")
+    print("playbackSoul localSoul:\(localSoul)")
     soulPlayer.startPlaying(localSoul)
   }
   
@@ -196,7 +197,7 @@ extension OutgoingVC: SoulRecorderDelegate {
     soulCaster.castSoulToServer(newSoul)
 
     let outgoing = "outgoing"
-    println("soulDidFinishRecording newSoul: \(newSoul.toParams(type: outgoing))")
+    print("soulDidFinishRecording newSoul: \(newSoul.toParams(type: outgoing))")
     //enableCancel()
   }
 }

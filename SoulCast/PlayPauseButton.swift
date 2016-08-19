@@ -12,7 +12,7 @@ class PlayPauseButton: UIButton {
 
   var buttonState:PlayingOrPaused = .Paused {
     didSet(oldValue) {
-      println("oldValue: \(oldValue.hashValue), newButtonState: \(buttonState.hashValue)")
+      print("oldValue: \(oldValue.hashValue), newButtonState: \(buttonState.hashValue)")
     }
   }
   

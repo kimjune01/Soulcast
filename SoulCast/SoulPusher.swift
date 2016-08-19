@@ -10,7 +10,7 @@ let soulPusher = SoulPusher()
 ///Pushes a soul to a device
 class SoulPusher: NSObject {
 
-  func push(#soul:Soul, toDevice:Device) -> Bool {
+  func push(soul:Soul, toDevice:Device) -> Bool {
     
     AWSSNS.defaultSNS().publish(publishInput(soul, device: toDevice))
     return false
@@ -45,7 +45,7 @@ class SoulPusher: NSObject {
     let jsonData = NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions.PrettyPrinted, error: &error)
     assert(error == nil, "JSON Serialization error!")
     let jsonString = jsonData!.description
-    println(jsonString)
+    print(jsonString)
     return jsonString
     
   }

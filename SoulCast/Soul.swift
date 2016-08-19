@@ -21,7 +21,7 @@ class Soul: NSObject {
   var device: Device?
   //length
   
-  func toParams(#type:String) -> NSDictionary {
+  func toParams(type:String) -> NSDictionary {
     let wrapperParams = NSMutableDictionary()
     wrapperParams["type"] = type
     let contentParams = NSMutableDictionary()
@@ -38,8 +38,8 @@ class Soul: NSObject {
   }
   
   
-  class func from(#incomingParams:NSDictionary) -> Soul {
-    println("fromParams incomingParams: \(incomingParams)")
+  class func from(incomingParams:NSDictionary) -> Soul {
+    print("fromParams incomingParams: \(incomingParams)")
     var incomingSoul = Soul()
     if incomingParams["type"] as? String == "incoming" {
       if let contentParams = incomingParams["soul"] as? NSDictionary {

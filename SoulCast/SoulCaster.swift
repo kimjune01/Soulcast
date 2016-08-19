@@ -49,7 +49,7 @@ class SoulCaster: NSObject {
         break
         
       case (let x, .Failed):
-        println("soulCasterState x.hashValue: \(x.hashValue)")
+        print("soulCasterState x.hashValue: \(x.hashValue)")
       case (let x, .NotReady):
         break
       default:
@@ -94,7 +94,7 @@ class SoulCaster: NSObject {
     self.outgoingSoul = localSoul
     assert(localSoul.localURL != nil, "There's nothing to upload!!!")
     self.uploadFileURL = NSURL(fileURLWithPath: localSoul.localURL!)
-    println("upload localSoul: \(localSoul) self.uploadFileURL: \(self.uploadFileURL)")
+    print("upload localSoul: \(localSoul) self.uploadFileURL: \(self.uploadFileURL)")
     assert(localSoul.epoch != nil, "There's no key assigned to the soul!!!")
     if (self.uploadTask != nil) {
       return;
@@ -198,7 +198,7 @@ extension SoulCaster: NSURLSessionDelegate {
       completionHandler
     }
     
-    println("URLSessionDidFinishEventsForBackgroundURLSession Completion Handler has been invoked, background upload task has finished.")
+    print("URLSessionDidFinishEventsForBackgroundURLSession Completion Handler has been invoked, background upload task has finished.")
   }
 }
 
@@ -208,9 +208,9 @@ extension SoulCaster {
     
     networkRequestManager().POST(serverURL + newSoulSuffix, parameters: params, success: { (operation: AFHTTPRequestOperation!, returnObject: AnyObject!) -> Void in
       self.delegate?.soulDidReachServer()
-      println("castSoulToServer successful!")
+      print("castSoulToServer successful!")
       }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-        println("castSoulToServer operation: \(operation) error: \(error)")
+        print("castSoulToServer operation: \(operation) error: \(error)")
     }
     
   }

@@ -24,7 +24,7 @@ var debugging = true
 
 func printline(string:String) {
   if debugging {
-    println(string)
+    print(string)
   }
 }
 

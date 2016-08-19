@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     case .Active:
       //called when a soul is received while app is open.
       printline("didReceiveRemoteNotification Active!!!")
-      soulCatcher.catch(userInfo: userInfo)
+      soulCatcher.catchSoul(userInfo)
       completionHandler(.NewData)
       break
 
@@ -76,21 +76,21 @@ extension AppDelegate { //Networking
     
 //    
 //    if reachabilityManager.reachable {
-//      println("reachable")
+//      print("reachable")
 //    } else {
-//      println("unreachable")
+//      print("unreachable")
 //    }
 //    reachabilityManager.setReachabilityStatusChangeBlock { (status: AFNetworkReachabilityStatus) -> Void in
 //      switch status {
 //      case .NotReachable:
 //        fallthrough
 //      case .Unknown:
-//        println("Unreachable")
+//        print("Unreachable")
 //        break
 //      case .ReachableViaWiFi:
 //        fallthrough
 //      case .ReachableViaWWAN:
-//        println("Reachable")
+//        print("Reachable")
 //        break
 //      }
 //    }
@@ -142,7 +142,7 @@ extension AppDelegate {
     
   }
   
-  func tokenStringFrom(#data:NSData) -> String {
+  func tokenStringFrom(data:NSData) -> String {
     var tokenString = data.description
     tokenString = tokenString.stringByReplacingOccurrencesOfString("<", withString: "", options: nil, range: nil)
     tokenString = tokenString.stringByReplacingOccurrencesOfString(">", withString: "", options: nil, range: nil)

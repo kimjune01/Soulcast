@@ -230,7 +230,7 @@ class MapVC: UIViewController {
         self.devicesLabel.text = newText
         
         }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-        println("updateDevicesLabel error: \(error)")
+        print("updateDevicesLabel error: \(error)")
       })
     }
   }

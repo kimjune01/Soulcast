@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		390A916A1AE48FF4005AEB3A /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A91691AE48FF4005AEB3A /* PlayPauseButton.swift */; };
 		3913C9651AC4F2FC00128D06 /* OutgoingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3913C9641AC4F2FC00128D06 /* OutgoingButton.swift */; };
-		3913C9671AC4F32400128D06 /* QCMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3913C9661AC4F32400128D06 /* QCMethod.swift */; };
 		3934AB531AB3821600941344 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934AB521AB3821600941344 /* AppDelegate.swift */; };
 		3934AB561AB3821600941344 /* SoulCast.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3934AB541AB3821600941344 /* SoulCast.xcdatamodeld */; };
 		3934AB581AB3821600941344 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934AB571AB3821600941344 /* ViewController.swift */; };
@@ -17,8 +16,6 @@
 		3934AB5D1AB3821600941344 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3934AB5C1AB3821600941344 /* Images.xcassets */; };
 		3934AB601AB3821600941344 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3934AB5E1AB3821600941344 /* LaunchScreen.xib */; };
 		3934AB6C1AB3821600941344 /* SoulCastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934AB6B1AB3821600941344 /* SoulCastTests.swift */; };
-		395EF6EE1ACC79D00020441A /* SimpleOutgoingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395EF6ED1ACC79D00020441A /* SimpleOutgoingButton.swift */; };
-		395EF6F21ACC92230020441A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395EF6F11ACC92230020441A /* Constants.swift */; };
 		395F22E41ABB6C4D00DFF05B /* SwiftJK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395F22E31ABB6C4D00DFF05B /* SwiftJK.swift */; };
 		39601F751AB3FD1400B52C1D /* SoulCatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39601F741AB3FD1400B52C1D /* SoulCatcher.swift */; };
 		39601F791AB400B100B52C1D /* SomeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39601F781AB400B100B52C1D /* SomeObject.m */; };
@@ -38,7 +35,9 @@
 		39A44E2E1AD1017E00539CFE /* IncomingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A44E2D1AD1017E00539CFE /* IncomingVC.swift */; };
 		39AAECF41AD1070600E9C0FA /* SoulTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AAECF31AD1070600E9C0FA /* SoulTester.swift */; };
 		39AAECF61AD10F3A00E9C0FA /* SoulStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AAECF51AD10F3A00E9C0FA /* SoulStack.swift */; };
-		4A33E4D960F2ADCCC9972925 /* libPods-SoulCast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D46ECF825C26142AC25248A9 /* libPods-SoulCast.a */; };
+		5C7EFB109DCD035443216097 /* libPods-SoulCast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC2AA3AF7AFC25010922935 /* libPods-SoulCast.a */; };
+		9D82F54ED7FDCDB12619A2A0 /* libPods-SoulCastTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 324C82E677F3D1E0E42045F9 /* libPods-SoulCastTests.a */; };
+		BDD32EE81D65741700824EA7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD32EE71D65741700824EA7 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,9 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1297CEF1CA5061C8D4D2FD13 /* Pods-SoulCast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoulCast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoulCast/Pods-SoulCast.debug.xcconfig"; sourceTree = "<group>"; };
+		324C82E677F3D1E0E42045F9 /* libPods-SoulCastTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SoulCastTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		390A91691AE48FF4005AEB3A /* PlayPauseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		3913C9641AC4F2FC00128D06 /* OutgoingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingButton.swift; sourceTree = "<group>"; };
-		3913C9661AC4F32400128D06 /* QCMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QCMethod.swift; sourceTree = "<group>"; };
 		3934AB4D1AB3821600941344 /* Soulcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soulcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3934AB511AB3821600941344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3934AB521AB3821600941344 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,8 +66,6 @@
 		3934AB651AB3821600941344 /* SoulCastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoulCastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3934AB6A1AB3821600941344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3934AB6B1AB3821600941344 /* SoulCastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoulCastTests.swift; sourceTree = "<group>"; };
-		395EF6ED1ACC79D00020441A /* SimpleOutgoingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleOutgoingButton.swift; sourceTree = "<group>"; };
-		395EF6F11ACC92230020441A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		395F22E31ABB6C4D00DFF05B /* SwiftJK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftJK.swift; sourceTree = "<group>"; };
 		39601F741AB3FD1400B52C1D /* SoulCatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulCatcher.swift; sourceTree = "<group>"; };
 		39601F761AB400B100B52C1D /* SoulCast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoulCast-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -90,9 +88,11 @@
 		39A44E2D1AD1017E00539CFE /* IncomingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingVC.swift; sourceTree = "<group>"; };
 		39AAECF31AD1070600E9C0FA /* SoulTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulTester.swift; sourceTree = "<group>"; };
 		39AAECF51AD10F3A00E9C0FA /* SoulStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoulStack.swift; sourceTree = "<group>"; };
-		72A9DEE19E711BA0EC0C6CE8 /* Pods-SoulCast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoulCast.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoulCast/Pods-SoulCast.release.xcconfig"; sourceTree = "<group>"; };
-		89DB9E60780F151CEA8FC8A6 /* Pods-SoulCast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoulCast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoulCast/Pods-SoulCast.debug.xcconfig"; sourceTree = "<group>"; };
-		D46ECF825C26142AC25248A9 /* libPods-SoulCast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SoulCast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		499645BCDA4CB93A400F8A8B /* Pods-SoulCastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoulCastTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoulCastTests/Pods-SoulCastTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8E5A0A462AF6C2DAA5C01A44 /* Pods-SoulCast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoulCast.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoulCast/Pods-SoulCast.release.xcconfig"; sourceTree = "<group>"; };
+		9CC2AA3AF7AFC25010922935 /* libPods-SoulCast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SoulCast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDD32EE71D65741700824EA7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BFF0D41CC8613EBB02E2DA95 /* Pods-SoulCastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoulCastTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoulCastTests/Pods-SoulCastTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 			files = (
 				3990C94E1AB38EE80029F087 /* CoreLocation.framework in Frameworks */,
 				3990C94C1AB38D0E0029F087 /* MapKit.framework in Frameworks */,
-				4A33E4D960F2ADCCC9972925 /* libPods-SoulCast.a in Frameworks */,
+				5C7EFB109DCD035443216097 /* libPods-SoulCast.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D82F54ED7FDCDB12619A2A0 /* libPods-SoulCastTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,8 +123,8 @@
 				3934AB4F1AB3821600941344 /* SoulCast */,
 				3934AB681AB3821600941344 /* SoulCastTests */,
 				3934AB4E1AB3821600941344 /* Products */,
-				F3A8090DF458C7E8D47B465C /* Pods */,
 				62D50BEF884D6DB44C702009 /* Frameworks */,
+				A06FDB8CDA7CB36430CB9B4B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,7 +142,7 @@
 			children = (
 				3934AB521AB3821600941344 /* AppDelegate.swift */,
 				39AAECF31AD1070600E9C0FA /* SoulTester.swift */,
-				395EF6F11ACC92230020441A /* Constants.swift */,
+				BDD32EE71D65741700824EA7 /* Constants.swift */,
 				39601F7D1AB400E900B52C1D /* ViewControllers */,
 				39601F7E1AB400FD00B52C1D /* Soul */,
 				39A44E171ACFC98C00539CFE /* Device */,
@@ -222,10 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				3934AB591AB3821600941344 /* Main.storyboard */,
-				3913C9661AC4F32400128D06 /* QCMethod.swift */,
 				3913C9641AC4F2FC00128D06 /* OutgoingButton.swift */,
 				390A91691AE48FF4005AEB3A /* PlayPauseButton.swift */,
-				395EF6ED1ACC79D00020441A /* SimpleOutgoingButton.swift */,
 				39601F7A1AB400E100B52C1D /* TPOscilloscopeLayer.h */,
 				39601F7B1AB400E100B52C1D /* TPOscilloscopeLayer.m */,
 			);
@@ -237,16 +236,19 @@
 			children = (
 				3990C94D1AB38EE80029F087 /* CoreLocation.framework */,
 				3990C94B1AB38D0E0029F087 /* MapKit.framework */,
-				D46ECF825C26142AC25248A9 /* libPods-SoulCast.a */,
+				9CC2AA3AF7AFC25010922935 /* libPods-SoulCast.a */,
+				324C82E677F3D1E0E42045F9 /* libPods-SoulCastTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F3A8090DF458C7E8D47B465C /* Pods */ = {
+		A06FDB8CDA7CB36430CB9B4B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				89DB9E60780F151CEA8FC8A6 /* Pods-SoulCast.debug.xcconfig */,
-				72A9DEE19E711BA0EC0C6CE8 /* Pods-SoulCast.release.xcconfig */,
+				1297CEF1CA5061C8D4D2FD13 /* Pods-SoulCast.debug.xcconfig */,
+				8E5A0A462AF6C2DAA5C01A44 /* Pods-SoulCast.release.xcconfig */,
+				499645BCDA4CB93A400F8A8B /* Pods-SoulCastTests.debug.xcconfig */,
+				BFF0D41CC8613EBB02E2DA95 /* Pods-SoulCastTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -258,11 +260,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3934AB6F1AB3821600941344 /* Build configuration list for PBXNativeTarget "SoulCast" */;
 			buildPhases = (
-				BF397A05035BFECE48AA1E1C /* Check Pods Manifest.lock */,
+				367337D39A89E5944FDC4779 /* [CP] Check Pods Manifest.lock */,
 				3934AB491AB3821600941344 /* Sources */,
 				3934AB4A1AB3821600941344 /* Frameworks */,
 				3934AB4B1AB3821600941344 /* Resources */,
-				AF5A4983869DDA6604718B5A /* Copy Pods Resources */,
+				DEE6D3479CA1AAFEA039610F /* [CP] Embed Pods Frameworks */,
+				FA7241F2059017F6216FA859 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -277,9 +280,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3934AB721AB3821600941344 /* Build configuration list for PBXNativeTarget "SoulCastTests" */;
 			buildPhases = (
+				9C7BC08F39DEBD19D237E0EF /* [CP] Check Pods Manifest.lock */,
 				3934AB611AB3821600941344 /* Sources */,
 				3934AB621AB3821600941344 /* Frameworks */,
 				3934AB631AB3821600941344 /* Resources */,
+				1229B161C90A13BB548F1019 /* [CP] Embed Pods Frameworks */,
+				ABE7A150F9251BE0E22ED0AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -297,6 +303,7 @@
 		3934AB451AB3821600941344 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = June;
 				TargetAttributes = {
@@ -356,34 +363,94 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AF5A4983869DDA6604718B5A /* Copy Pods Resources */ = {
+		1229B161C90A13BB548F1019 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoulCast/Pods-SoulCast-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoulCastTests/Pods-SoulCastTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BF397A05035BFECE48AA1E1C /* Check Pods Manifest.lock */ = {
+		367337D39A89E5944FDC4779 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9C7BC08F39DEBD19D237E0EF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ABE7A150F9251BE0E22ED0AD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoulCastTests/Pods-SoulCastTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEE6D3479CA1AAFEA039610F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoulCast/Pods-SoulCast-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA7241F2059017F6216FA859 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoulCast/Pods-SoulCast-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -393,16 +460,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3913C9671AC4F32400128D06 /* QCMethod.swift in Sources */,
+				BDD32EE81D65741700824EA7 /* Constants.swift in Sources */,
 				3934AB581AB3821600941344 /* ViewController.swift in Sources */,
 				39A44E1D1AD06F8600539CFE /* Device.swift in Sources */,
-				395EF6EE1ACC79D00020441A /* SimpleOutgoingButton.swift in Sources */,
 				39A44E2E1AD1017E00539CFE /* IncomingVC.swift in Sources */,
 				39601F791AB400B100B52C1D /* SomeObject.m in Sources */,
 				39AAECF41AD1070600E9C0FA /* SoulTester.swift in Sources */,
 				3934AB531AB3821600941344 /* AppDelegate.swift in Sources */,
 				39601F751AB3FD1400B52C1D /* SoulCatcher.swift in Sources */,
-				395EF6F21ACC92230020441A /* Constants.swift in Sources */,
 				3990C95A1AB3A39F0029F087 /* SoulPlayer.swift in Sources */,
 				3934AB561AB3821600941344 /* SoulCast.xcdatamodeld in Sources */,
 				3990C9561AB3A2350029F087 /* Soul.swift in Sources */,
@@ -542,7 +607,7 @@
 		};
 		3934AB701AB3821600941344 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89DB9E60780F151CEA8FC8A6 /* Pods-SoulCast.debug.xcconfig */;
+			baseConfigurationReference = 1297CEF1CA5061C8D4D2FD13 /* Pods-SoulCast.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -559,7 +624,7 @@
 		};
 		3934AB711AB3821600941344 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72A9DEE19E711BA0EC0C6CE8 /* Pods-SoulCast.release.xcconfig */;
+			baseConfigurationReference = 8E5A0A462AF6C2DAA5C01A44 /* Pods-SoulCast.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -575,6 +640,7 @@
 		};
 		3934AB731AB3821600941344 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 499645BCDA4CB93A400F8A8B /* Pods-SoulCastTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -597,6 +663,7 @@
 		};
 		3934AB741AB3821600941344 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFF0D41CC8613EBB02E2DA95 /* Pods-SoulCastTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";

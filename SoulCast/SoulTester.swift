@@ -60,12 +60,12 @@ class SoulTester: NSObject {
   }
   
   func uploadingFinished() {
-    println("soulTester uploadingFinished")
+    print("soulTester uploadingFinished")
   }
   
   func testIncoming(userInfo:NSDictionary) {
-    println("testIncoming userInfo: \(userInfo)")
-    soulCatcher.catch(userInfo: userInfo)
+    print("testIncoming userInfo: \(userInfo)")
+    soulCatcher.catchSoul(userInfo)
     
   }
   

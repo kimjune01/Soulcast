@@ -78,7 +78,7 @@ class IncomingVC: UIViewController {
   
   func catchIfBlank(emptySoul:Soul) {
     if emptySoul.localURL == nil {
-      soulCatcher.catch(incomingSoul: emptySoul)
+      soulCatcher.catchSoul(emptySoul)
     }
   }
   

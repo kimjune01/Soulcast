@@ -53,9 +53,9 @@ class SoulRecorder: NSObject {
       case (.Finished, .Standby):
         break
       case (let x, .Err):
-        println("state x.hashValue: \(x.hashValue)")
+        print("state x.hashValue: \(x.hashValue)")
       default:
-        println("oldValue: \(oldValue.hashValue), state: \(state.hashValue)")
+        print("oldValue: \(oldValue.hashValue), state: \(state.hashValue)")
         assert(false, "OOPS!!!")
       }
     }
@@ -68,20 +68,20 @@ class SoulRecorder: NSObject {
   }
   
   func displayLinkFired(link:CADisplayLink) {
-    if state == .RecordingStarted || state == .RecordingLongEnough { displayCounter++ }
+    if state == .RecordingStarted || state == .RecordingLongEnough { displayCounter += 1 }
     if displayCounter == 60 * minimumRecordDuration {
-      println("displayCounter == 60 * minimumRecordDuration")
+      print("displayCounter == 60 * minimumRecordDuration")
       if state == .RecordingStarted { minimumDurationDidPass() }
     }
     if displayCounter == 60 * maximumRecordDuration {
-      println("displayCounter == 60 * maximumRecordDuration")
+      print("displayCounter == 60 * maximumRecordDuration")
       if state == .RecordingLongEnough { pleaseStopRecording() }
       displayCounter = 0
     }
   }
   
   func pleaseStartRecording() {
-    println("pleaseStartRecording()")
+    print("pleaseStartRecording()")
     if state != .Standby {
       assert(false, "OOPS!! Tried to start recording from an inappropriate state!")
     } else {
@@ -91,7 +91,7 @@ class SoulRecorder: NSObject {
   }
   
   func pleaseStopRecording() {
-    println("pleaseStopRecording()")
+    print("pleaseStopRecording()")
     if state == .RecordingStarted {
       discardRecording()
     } else if state == .RecordingLongEnough {
@@ -100,7 +100,7 @@ class SoulRecorder: NSObject {
   }
   
   private func startRecording() {
-    println("startRecording()")
+    print("startRecording()")
     var error:NSError?
     let result = audioController.start(&error)
     if let e = error {
@@ -110,7 +110,7 @@ class SoulRecorder: NSObject {
     currentRecordingPath = outputPath()
     recorder?.beginRecordingToFileAtPath(currentRecordingPath, fileType: AudioFileTypeID(kAudioFileM4AType), error: &error)
     if let e = error {
-      println("raRRRWAREEWAR recording unsuccessful! error: \(e)")
+      print("raRRRWAREEWAR recording unsuccessful! error: \(e)")
       recorder = nil
       return
     }
@@ -120,7 +120,7 @@ class SoulRecorder: NSObject {
   }
   
   private func minimumDurationDidPass() {
-    println("minimumDurationDidPass()")
+    print("minimumDurationDidPass()")
     state = .RecordingLongEnough
     delegate?.soulDidReachMinimumDuration()
   }
@@ -139,24 +139,24 @@ class SoulRecorder: NSObject {
     if let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) {
       if paths.count > 0 {
         let randomNumberString = String(NSDate.timeIntervalSinceReferenceDate().description)
-        println("randomNumberString: \(randomNumberString)")
+        print("randomNumberString: \(randomNumberString)")
         outputPath = (paths[0] as? String)! + "/Recording" + randomNumberString + ".m4a"
         let manager = NSFileManager.defaultManager()
         var error:NSError?
         if manager.fileExistsAtPath(outputPath) {
           manager.removeItemAtPath(outputPath, error: &error)
           if let e = error {
-            println("outputPath(readOrWrite:FileReadWrite) error: \(e)")
+            print("outputPath(readOrWrite:FileReadWrite) error: \(e)")
           }
         }
       }
     }
-    println("outputPath: \(outputPath)")
+    print("outputPath: \(outputPath)")
     return outputPath
   }
   
   private func discardRecording() {
-    println("discardRecording")
+    print("discardRecording")
     state = .Failed
     recorder?.finishRecording()
     resetRecorder()
@@ -164,7 +164,7 @@ class SoulRecorder: NSObject {
   }
   
   private func saveRecording() {
-    println("saveRecording")
+    print("saveRecording")
     state = .Finished
     recorder?.finishRecording()
     resetRecorder()
@@ -175,7 +175,7 @@ class SoulRecorder: NSObject {
   }
   
   private func resetRecorder() {
-    println("resetRecorder")
+    print("resetRecorder")
     state = .Standby
     audioController.removeOutputReceiver(recorder)
     audioController.removeInputReceiver(recorder)

@@ -33,7 +33,7 @@ class SoulPlayer: NSObject {
   }
 
   
-  func remoteUrlFromKey(NSString) -> NSString {
+  func remoteUrlFromKey(_: NSString) -> NSString {
     
     return ""
   }

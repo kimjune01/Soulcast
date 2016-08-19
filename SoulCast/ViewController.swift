@@ -58,7 +58,7 @@ class ViewController: UIViewController {
 
 extension ViewController: OutgoingVCDelegate {
   func outgoingRadius() -> Double {
-    println("outgoingradius: mapVC.userSpan!.latitudeDelta: \(mapVC.userSpan!.latitudeDelta)")
+    print("outgoingradius: mapVC.userSpan!.latitudeDelta: \(mapVC.userSpan!.latitudeDelta)")
     return mapVC.userSpan!.latitudeDelta
   }
   
